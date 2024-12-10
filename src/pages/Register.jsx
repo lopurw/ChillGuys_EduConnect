@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { register } from '../services/ApiServ'; 
+import styles from '../styles/Register.module.css';
+
 
 const Register = () => {
   const [role, setRole] = useState('user'); 
