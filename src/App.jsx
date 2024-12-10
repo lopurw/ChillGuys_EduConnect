@@ -2,6 +2,7 @@
 import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router } from 'react-router-dom';
+import CourseList from "./components/CourseList";
 
 const App = () => {
 	return (
@@ -9,7 +10,7 @@ const App = () => {
 			<div className="App">
 				<Navbar></Navbar>
 				<AppRoutes />
-
+			
 			</div>
 		</Router>
 	);
