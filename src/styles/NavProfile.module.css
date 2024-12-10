@@ -75,77 +75,76 @@
 
 }
 
-  .main_info_block img {
-    width: 200px;
-    height: 200px;
-  }
+.main_info_block img {
+  width: 200px;
+  height: 200px;
+}
 
-  .main_info_block_text_info_block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    margin-left: 50px;
-  }
+.main_info_block_text_info_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 50px;
+}
 
-  .main_info_block_text_info {
-    width: 100%;
-  }
+.main_info_block_text_info {
+  width: 100%;
+}
 
-  .main_info_block_text_info > * {
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-  }
+.main_info_block_text_info > * {
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
   
-  .mainContent h3 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 15px;
-  }
+.mainContent h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
   
-  .mainContent div {
-    margin-bottom: 10px;
-  }
+.mainContent div {
+  margin-bottom: 10px;
+}
   
-  .mainContent input {
-    padding: 5px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-  }
+.mainContent input {
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
   
-  .mainContent img {
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
+.mainContent img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
   
-  .mainContent button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    color: white;
-    cursor: pointer;
-  }
+.mainContent button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+}
   
-  .mainContent h4 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
+.mainContent h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
 
-  .downloadButton {
-    padding: 10px 20px;
-    background-color: #FFD700;
-   
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.downloadButton {
+  padding: 10px 20px;
+  background-color: #FFD700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
   
-  .downloadButton:hover {
-    background-color: #FFCC00;
-  }
+.downloadButton:hover {
+  background-color: #FFCC00;
+}
 
 /*Portfolio*/
 .portfolio_main_info {
