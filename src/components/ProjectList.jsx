@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ProjectCard from './ProjectCard'; // Импортируем ProjectCard
 import { Link } from 'react-router-dom';
+import classes from '../styles/ProjectList.module.css';
 
 const ProjectList = () => {
 	const [selectedProject, setSelectedProject] = useState(null);
@@ -39,20 +40,23 @@ const ProjectList = () => {
 	};
 
 	return (
-		<div className="project-list">
-			<h2>Мои проекты</h2> 
-			<div className="project-cards">
-				{projects.length > 0 ? (
-					projects.map((project) => (
-						<Link to={`/project/${project.id}`} key={project.id}>
-							<ProjectCard project={project} onStartProject={handleStartProject} />
-						</Link>
-					))
-				) : (
-					<p>Нет проектов для отображения</p>
-				)}
+		<div className={classes.wrapper}>
+			<div className={classes.container}>
+				<div className={classes.project_list}>
+					<h2>Мои проекты</h2>
+					<div>
+						{projects.length > 0 ? (
+							projects.map((project) => (
+								<ProjectCard project={project} onStartProject={handleStartProject} />
+							))
+						) : (
+							<p>Нет проектов для отображения</p>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
+
 	);
 };
 

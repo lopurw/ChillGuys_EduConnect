@@ -209,7 +209,6 @@ const NavProfile = () => {
   };
 
   return (
-
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <div className={classes.profile_wrapper}>

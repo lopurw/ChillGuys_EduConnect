@@ -7,7 +7,6 @@ const MyCourses = () => {
   const courses = [
     {
       id: 1,
-    
       title: "JavaScript для начинающих",
       description: "Изучите основы JavaScript с нуля.",
       image: "https://via.placeholder.com/150",

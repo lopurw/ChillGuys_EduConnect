@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Comment from './Comment'; // Импортируем новый компонент Comment
+import Comment from './Comment';
+import classes from '../styles/ProjectDetail.module.css';
+import img from "./images.jpg";
 
 const ProjectDetail = () => {
 	const { id } = useParams();
@@ -61,52 +63,65 @@ const ProjectDetail = () => {
 	};
 
 	return (
-		<div className="project-detail">
-			<img src={image} alt={title} className="project-image" />
+		<div className={classes.wrapper}>
+			<div className={classes.container}>
+				<div className={classes.project_detail}>
+					<div className={classes.project_detail_img_block}>
+						<img src={image} alt={title} className="project-image" />
+						<div className={classes.project_detail_img_block_text}>
+							<h3>{title}</h3>
+							<p>
+								<strong>Категория:</strong> {category}
+							</p>
+						</div>
+					</div>
+					<p>{description}</p>
 
-			<h2>{title}</h2>
-			<p>
-				<strong>Категория:</strong> {category}
-			</p>
-			<p>{description}</p>
+					<div className={classes.project_detail_tasks}>
+						<h3>Задания/ТЗ</h3>
+						<li>
+							{tasks.map((task, index) => (
+								<li key={index}>{task}</li>
+							))}
+						</li>
+					</div>
 
-			<h3>Задания/ТЗ</h3>
-			<ul>
-				{tasks.map((task, index) => (
-					<li key={index}>{task}</li>
-				))}
-			</ul>
+					<div className={classes.additional_materials}>
+						<h3>Дополнительные материалы</h3>
+						<div className={classes.additional_materials_block}>
+							{additionalMaterials.map((material, index) => (
+								<div className={classes.additional_materials_item} key={index}>
+									<img src={'/public/Document_icon.png'} alt={''} className="course-image" />
+									{material.type === 'pdf' ? (
+										<a href={material.link} target="_blank" rel="noopener noreferrer">
+											{material.title} (PDF)
+										</a>
+									) : (
+										<a href={material.link} target="_blank" rel="noopener noreferrer">
+											{material.title} (Видео)
+										</a>
+									)}
+								</div>
+							))}
+						</div>
+					</div>
 
-			<h3>Дополнительные материалы</h3>
-			<ul>
-				{additionalMaterials.map((material, index) => (
-					<li key={index}>
-						{material.type === 'pdf' ? (
-							<a href={material.link} target="_blank" rel="noopener noreferrer">
-								{material.title} (PDF)
-							</a>
-						) : (
-							<a href={material.link} target="_blank" rel="noopener noreferrer">
-								{material.title} (Видео)
-							</a>
-						)}
-					</li>
-				))}
-			</ul>
+					<div className={classes.project_detail_comments_block}>
+						<h3>Комментарии</h3>
+						<div className={classes.project_detail_add_comments}>
+							<textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Напишите комментарий..." />
+							<button onClick={handleAddComment}>Добавить комментарий</button>
+						</div>
+						<div className={classes.project_detail_comments}>
+							{comments.map((comment, index) => (
+								<Comment key={index} author={comment.author} content={comment.content} />
+							))}
+						</div>
+					</div>
 
-			<h3>Комментарии</h3>
-			<div className="comments">
-				{comments.map((comment, index) => (
-					<Comment key={index} author={comment.author} content={comment.content} />
-				))}
+					<button className={classes.backButton} onClick={handleBack}>Назад к списку</button>
+				</div>
 			</div>
-
-			<div className="add-comment">
-				<textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Напишите комментарий..." />
-				<button onClick={handleAddComment}>Добавить комментарий</button>
-			</div>
-
-			<button onClick={handleBack}>Назад к списку</button>
 		</div>
 	);
 };
