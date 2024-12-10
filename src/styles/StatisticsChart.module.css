@@ -1,0 +1,21 @@
+.statistic_wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 70px;
+}
+.statistic_inner_wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	justify-content: center;
+	text-align: center;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	width: fit-content;
+	padding: 20px 50px;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+}

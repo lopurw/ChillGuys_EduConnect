@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { register } from '../services/ApiServ'; 
+import { register } from '../services/ApiServ';
 import StatisticsChart from '../components/StatisticsUserHome';
+
+import classes from '../styles/HomeUser.module.css';
+
 import { NavLink } from 'react-router-dom';
 
 const HomeUser = () => {
@@ -8,19 +11,36 @@ const HomeUser = () => {
 
   return (
     <>
+    <div className={classes.main}>
     <h1>Начинай обучение уже сейчас!</h1>
+    <div className={classes.buttons_container}>
     <NavLink
           to="/coursesuser" 
           className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
         >
-          <button>Поиск курсов</button>
+          <button className={classes.button}>{' '}
+					<img src="/public/search.png" alt="" /> Поиск курсов</button>
         </NavLink>
-    <button>Вакансии</button>
-    <button>Проекты</button>
-    <button>Мои курсы</button>
+   <button className={classes.button}>
+					{' '}
+					<img src="/public/vacancy.png" alt="" />
+					Вакансии
+				</button>
+				<button className={classes.button}>
+					{' '}
+					<img src="/public/project.png" alt="" /> Проекты
+				</button>
+				<button className={classes.button}>
+					{' '}
+					<img src="/public/courses.png" alt="" /> Мои курсы
+				</button>
     <StatisticsChart></StatisticsChart>
+    </div>
+</div>
+
     </>
   );
+
 };
 
 export default HomeUser;
