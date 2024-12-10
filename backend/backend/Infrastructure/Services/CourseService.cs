@@ -39,7 +39,8 @@ public class CourseService(DataContext context)
             var query = context.Courses
                 .Include(c => c.Teacher)
                 .Include(c => c.Lessons)
-                .Include(c => c.Students)
+                .Include(c => c.Students) // Include the join table
+                    .ThenInclude(sc => sc.Student)
                 .AsQueryable();
 
             var totalRecords = await query.CountAsync();
@@ -74,6 +75,56 @@ public class CourseService(DataContext context)
             return new PagedResponse<List<GetCoursesDto>>(HttpStatusCode.InternalServerError, ex.Message);
         }
     }
+
+    
+    public async Task<PagedResponse<List<GetCoursesDto>>> GetStudentsCoursesAsync(int studentId, int pageNumber = 1, int pageSize = 1)
+    {
+        try
+        {
+            // Filter courses that include the specified studentId
+            var query = context.Courses
+                .Where(c => c.Students.Any(sc => sc.StudentId == studentId)) // Filter by student ID
+                .Include(c => c.Teacher)
+                .Include(c => c.Lessons)
+                .Include(c => c.Students) // Include the join table
+                .ThenInclude(sc => sc.Student) // Include the student related to each record in the join table
+                .AsQueryable();
+
+            var totalRecords = await query.CountAsync();
+
+            // Retrieve courses with pagination
+            var courses = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Map courses to GetCoursesDto
+            var courseDtos = courses.Select(course => new GetCoursesDto
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                TeacherId = course.Teacher.Id,
+                VideoUrl = course.VideoUrl,
+                DocumentationUrl = course.DocumentationUrl,
+                TeacherName = course.Teacher.Name,
+                Students = course.Students.Select(sc => new StudentDto
+                {
+                    Id = sc.Student.Id,
+                    Name = sc.Student.Name
+                }).ToList(),
+                CreatedAt = course.CreatedAt,
+                UpdatedAt = course.UpdatedAt
+            }).ToList();
+
+            return new PagedResponse<List<GetCoursesDto>>(courseDtos, totalRecords, pageNumber, pageSize);
+        }
+        catch (Exception ex)
+        {
+            return new PagedResponse<List<GetCoursesDto>>(HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
+
 
 
     public async Task<Response<GetCourseDto>> GetCourseByIdAsync(int id)

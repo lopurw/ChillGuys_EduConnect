@@ -22,6 +22,14 @@ public class CourseController : ControllerBase
         var result = await _courseService.GetCoursesAsync(pageNumber, pageSize);
         return Ok(result);
     }
+    
+    [HttpGet("getStudentCourses")]
+    public async Task<IActionResult> GetStudentCourses(int studentId ,int pageNumber = 1, int pageSize = 10)
+    {
+        var result = await _courseService.GetStudentsCoursesAsync(studentId, pageNumber, pageSize);
+        return Ok(result);
+    }
+
 
     [HttpGet("getCourseById")]
     public async Task<IActionResult> GetCourseById(int id)
