@@ -1,0 +1,27 @@
+@import url('Variables.css');
+
+.course_detail_header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.course_detail {
+    padding: 50px;
+}
+
+.course_detail_header_item {
+    display: flex;
+}
+
+.course_detail_header_item img {
+    width: 250px;
+    height: 250px;
+}
+
+.course_detail_header_item_text {
+    margin-top: auto;
+}
+
+.course_detail_header_item_text p:last-child {
+    margin-bottom: 0;
+}

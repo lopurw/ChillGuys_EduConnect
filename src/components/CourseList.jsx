@@ -93,8 +93,8 @@ const CourseList = () => {
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <div className={classes.course_list}>
-            <div className="filters">
-              <div>
+            <div className={classes.filters}>
+              <div className={classes.filters_item}>
                 <label>Категория:</label>
                 <select
                     value={categoryFilter}
@@ -106,7 +106,7 @@ const CourseList = () => {
                 </select>
               </div>
 
-              <div>
+              <div className={classes.filters_item}>
                 <label>Время на прохождение:</label>
                 <select
                     value={durationFilter}
