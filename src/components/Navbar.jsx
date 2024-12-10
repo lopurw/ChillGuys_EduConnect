@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Navbar.css';
+import '../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const [role, setRole] = useState('Студент');
+  const [role, setRole] = useState('');
 
   
 
   return (
-    <nav className="navbar">
-      <ul className="navList">
+    <nav>
+      <ul>
         
         {role === 'Студент' ? (
-          <li className="navItem">
+          <li>
             <NavLink
               to="/homeuser"
               className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
@@ -21,7 +21,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         ) : (
-          <li className="navItem">
+          <li>
             <NavLink
               to="/home"
               className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
@@ -30,7 +30,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         )}
-        <li className="navItem">
+        <li>
           <NavLink
             to="/login"
             className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
@@ -38,7 +38,7 @@ const Navbar = () => {
             Вход
           </NavLink>
         </li>
-        <li className="navItem">
+        <li>
           <NavLink
             to="/register"
             className={({ isActive }) => (isActive ? 'activeLink' : 'link')}

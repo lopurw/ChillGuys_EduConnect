@@ -1,3 +1,5 @@
+@import url('Variables.css');
+
 * {
 	font-family: 'Comfortaa', sans-serif !important;
 	font-optical-sizing: auto !important;
@@ -88,8 +90,6 @@ video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	/* font-size: 100%; */
-	/* font: inherit; */
 	vertical-align: baseline;
 }
 

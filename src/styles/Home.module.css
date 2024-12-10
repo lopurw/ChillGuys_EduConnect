@@ -1,0 +1,5 @@
+@import url('Variables.css');
+
+.form {
+    color: var(--green-color);
+}
