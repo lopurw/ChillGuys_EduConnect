@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { register } from '../services/ApiServ';
 import StatisticsChart from '../components/StatisticsUserHome';
@@ -8,8 +7,6 @@ import classes from '../styles/HomeUser.module.css';
 import { NavLink } from 'react-router-dom';
 
 const HomeUser = () => {
-  
-
   return (
     <>
     <div className={classes.main}>
@@ -46,8 +43,6 @@ const HomeUser = () => {
 
     </>
   );
-
 };
 
 export default HomeUser;
-

@@ -1,0 +1,33 @@
+@import url('Variables.css');
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    padding: 0 80px 0 80px;
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 35px;
+}
+
+.course_cards_wrapper {
+    width: 100%;
+}
+
+.course_list {
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+}
+
+.course_cards {
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+}
