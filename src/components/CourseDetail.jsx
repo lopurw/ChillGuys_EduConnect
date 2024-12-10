@@ -81,23 +81,55 @@ const CourseDetail = () => {
   };
 
   return (
-    <div className={classes.course_detail}>
-      <h2>{title}</h2>
-      <div className={classes.course_detail_header}>
-        <div className={classes.course_detail_header_item}>
-          <img src={image} alt={title} className="course-image" />
-          <div className={classes.course_detail_header_item_text}>
-            <p>{description}</p>
-            <p><strong>Время на прохождение:</strong> {duration}</p>
-          </div>
-        </div>
-        <div className={classes.course_detail_header_item}>
-          <img src={instructorImage} alt={instructor} className="instructor-image" />
-          <div className={classes.course_detail_header_item_text}>
-            <p><strong>Преподаватель:</strong> {instructor}</p>
+      <div className={classes.wrapper}>
+        <div className={classes.container}>
+          <div className={classes.course_detail}>
+            <h2>{title}</h2>
+            <div className={classes.course_detail_header}>
+              <div className={classes.course_detail_header_item}>
+                <img src={image} alt={title} className="course-image" />
+                <div className={classes.course_detail_header_item_text}>
+                  <p>{description}</p>
+                  <p><strong>Время на прохождение:</strong> {duration}</p>
+                </div>
+              </div>
+              <div className={classes.course_detail_header_item}>
+                <img src={instructorImage} alt={instructor} className="instructor-image" />
+                <div className={classes.course_detail_header_item_text}>
+                  <p><strong>Преподаватель:</strong> {instructor}</p>
+                </div>
+              </div>
+            </div>
+            <div className={classes.video_block}>
+              <h2>Видео с курса</h2>
+              <div className={classes.video_block_videos}>
+                {videos.slice(0, 3).map((video, index) => (
+                    <video key={index} controls>
+                      <source src={video} type="video/mp4" />
+                      Ваш браузер не поддерживает видео.
+                    </video>
+                ))}
+              </div>
+              <button>Просмотреть все видео</button>
+            </div>
+
+            <div className={classes.documentation_block}>
+              <h3>Документация</h3>
+              <ul>
+                {documentation.map((doc, index) => (
+                    <li key={index}>
+                      <img src={'/public/Document_icon.png'} alt={''} className="course-image" />
+                      <a href={doc} target="_blank" rel="noopener noreferrer">Документ {index + 1}</a>
+                    </li>
+                ))}
+              </ul>
+            </div>
+
+            <button onClick={handleBack}>Назад к списку</button>
           </div>
         </div>
       </div>
+
       <h3>Видео с курса</h3>
       <div className="video-list">
         {videos.slice(0, 3).map((video, index) => (
@@ -118,9 +150,7 @@ const CourseDetail = () => {
         ))}
       </ul>
 
-      <button onClick={handleBack}>Назад к списку</button>
-     
-    </div>
+
   );
 };
 
