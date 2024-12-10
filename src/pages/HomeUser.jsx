@@ -34,8 +34,8 @@ const HomeUser = () => {
 					{' '}
 					<img src="/public/courses.png" alt="" /> Мои курсы
 				</button>
-    <StatisticsChart></StatisticsChart>
     </div>
+    <StatisticsChart></StatisticsChart>
 </div>
 
     </>

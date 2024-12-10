@@ -4,6 +4,7 @@ import classes from '../styles/Navbar.module.css';
 
 const Navbar = () => {
   const [role, setRole] = useState('Студент');
+  
 
   return (
       <nav>
