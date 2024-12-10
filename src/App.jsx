@@ -13,6 +13,7 @@ const App = () => {
 			<div className="App">
 				<Navbar></Navbar>
 				<AppRoutes />
+
 			</div>
 		</Router>
 	);
