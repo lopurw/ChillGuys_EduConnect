@@ -21,8 +21,17 @@
 	padding: 10px 20px;
 	font-size: 20px;
 	transition: all 0.2s ease-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.2s ease-out;
+}
+.button:hover {
+	scale: 1.05;
+	transform: translateY(-5px);
 }
 .button img {
-	width: 50px;
+	width: auto;
 	height: 50px;
 }
