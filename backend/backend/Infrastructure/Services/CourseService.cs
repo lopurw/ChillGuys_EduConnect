@@ -76,7 +76,7 @@ public class CourseService(DataContext context)
     }
 
 
-    public async Task<Response<Course>> GetCourseByIdAsync(int id)
+    public async Task<Response<GetCourseDto>> GetCourseByIdAsync(int id)
     {
         try
         {
@@ -86,15 +86,29 @@ public class CourseService(DataContext context)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             if (course == null)
-                return new Response<Course>(HttpStatusCode.NotFound, "Course not found");
+                return new Response<GetCourseDto>(HttpStatusCode.NotFound, "Course not found");
 
-            return new Response<Course>(course);
+            var courseDto = new GetCourseDto
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                VideoUrl = course.VideoUrl,
+                DocumentationUrl = course.DocumentationUrl,
+                TeacherName = course.Teacher?.Name,
+                Lessons = course.Lessons?.Select(l => l.Title).ToList(),
+                CreatedAt = course.CreatedAt,
+                UpdatedAt = course.UpdatedAt
+            };
+
+            return new Response<GetCourseDto>(courseDto);
         }
         catch (Exception ex)
         {
-            return new Response<Course>(HttpStatusCode.InternalServerError, ex.Message);
+            return new Response<GetCourseDto>(HttpStatusCode.InternalServerError, ex.Message);
         }
     }
+
 
     public async Task<Response<string>> UpdateCourse(UpdateCourseDto updateCourseDto)
     {
@@ -379,18 +393,6 @@ public class UpdateCourseDto
     public string Description { get; set; }
 }
 
-public class GetCourseDto
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string VideoUrl { get; set; }
-    public string DocumentationUrl { get; set; }
-    public int TeacherId { get; set; }
-    public string TeacherName { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
-}
 
 public class GetCoursesDto
 {
@@ -436,6 +438,19 @@ public class GetLessonDto
     public string Title { get; set; }
     public string Content { get; set; }
     public string[] Resources { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+}
+
+public class GetCourseDto
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string TeacherName { get; set; }
+    public string VideoUrl { get; set; }
+    public string DocumentationUrl { get; set; }
+    public List<string> Lessons { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

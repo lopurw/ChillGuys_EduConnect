@@ -1,119 +1,102 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import img from './images.jpg'
-import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png'
+import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png';
+import { getCourseById } from "../services/ApiServ.js";
 
 const CourseDetail = () => {
-  const { id } = useParams(); 
-  const history = useNavigate();
-  const courses = [
-   
-    {
-      id: 1,
-      title: 'Курс по React',
-      description: 'Изучите основы React и создание приложений.',
-      duration: '10 часов',
-      category: 'Frontend',
-      instructor: 'Иван Иванов',
-      instructorImage: './images.jpg', 
-      videos: [
-        '/public/sample-5s.mp4',
-        '/public/sample-5s.mp4',
-        '/public/sample-5s.mp4'
-      ],
-      documentation: [
-        '/public/f2.pdf',
-        '/public/p2.pptx'
-      ],
-      image: '/public/images.jpg',
-    },
-    {
-      id: 2,
-      title: 'Курс по JavaScript',
-      description: 'Погрузитесь в мир JavaScript и его возможностей.',
-      duration: '15 часов',
-      category: 'Programming',
-      instructor: 'Мария Петрова',
-      instructorImage: '/public/images.jpg', 
-      videos: [
-        '/videos/js-video1.mp4',
-        '/videos/js-video2.mp4',
-        '/videos/js-video3.mp4'
-      ],
-      documentation: [
-        '/docs/js-docs.pdf',
-        '/docs/js-presentation.pptx'
-      ],
-      image: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 3,
-      title: 'Курс по CSS',
-      description: 'Разработайте навыки работы с CSS и дизайном веб-страниц.',
-      duration: '8 часов',
-      category: 'Frontend',
-      instructor: 'Сергей Сидоров',
-      instructorImage: '/public/sergey.jpg', 
-      videos: [
-        '/public/css-video1.mp4',
-        '/public/css-video2.mp4',
-        '/public/css-video3.mp4'
-      ],
-      documentation: [
-        '/public/css-docs.pdf',
-        '/public/css-presentation.pptx'
-      ],
-      image: 'https://via.placeholder.com/150',
+    const { id } = useParams(); // Get course ID from URL
+    const navigate = useNavigate(); // Navigation hook for "back" button
+    const [course, setCourse] = useState(null); // State for course data
+    const [loading, setLoading] = useState(true); // Loading state
+
+    // Fetch course details on component mount
+    useEffect(() => {
+        const fetchCourse = async () => {
+            try {
+                const response = await getCourseById(id); // Fetch course by ID
+                setCourse(response.data); // Set course data
+            } catch (error) {
+                console.error('Error fetching course:', error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching data
+            }
+        };
+
+        fetchCourse();
+    }, [id]); // Dependency on 'id' so it runs whenever 'id' changes
+
+    // Handle "back" button click
+    const handleBack = () => {
+        navigate('/');  // Navigate back to the homepage
+    };
+
+    if (loading) {
+        return <p>Загрузка данных курса...</p>; // Show loading message
     }
-  ];
-  const course = courses.find(course => course.id === parseInt(id));  
 
-  if (!course) {
-    return <p>Курс не найден</p>;
-  }
+    if (!course) {
+        return <p>Курс не найден</p>; // Show error if no course is found
+    }
 
-  const { title, description, duration, instructor, instructorImage, videos, documentation, image } = course;
+    // Destructure course data
+    const { title, description, teacherName, lessons, createdAt, updatedAt, videoUrl, documentationUrl } = course;
+    console.log(course);
 
-  const handleBack = () => {
-    history.push('/');  
-  };
+    // Assuming videoUrl and documentationUrl are directories or paths to content in the public folder
+    const videoLinks = videoUrl ? videoUrl.split(',') : [];
+    const documentationLinks = documentationUrl ? documentationUrl.split(',') : [];
 
-  return (
-    <div className="course-detail">
-        
-        <img src={image} alt={title} className="course-image" />
+    return (
+        <div className="course-detail">
+            <img src={image} alt={title} className="course-image" />
 
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <p><strong>Время на прохождение:</strong> {duration}</p>
-      <p><strong>Преподаватель:</strong> {instructor}</p>
-      <img src={instructorImage} alt={instructor} className="instructor-image" />
-      
-      <h3>Видео с курса</h3>
-      <div className="video-list">
-        {videos.slice(0, 3).map((video, index) => (
-          <video key={index} controls>
-            <source src={video} type="video/mp4" />
-            Ваш браузер не поддерживает видео.
-          </video>
-        ))}
-      </div>
-      <button>Просмотреть все видео</button> {/* Кнопка для просмотра всех видео */}
+            <h2>{title}</h2>
+            <p>{description}</p>
+            <p><strong>Преподаватель:</strong> {teacherName}</p>
+            <p><strong>Дата создания:</strong> {new Date(createdAt).toLocaleDateString()}</p>
+            <p><strong>Последнее обновление:</strong> {new Date(updatedAt).toLocaleDateString()}</p>
 
-      <h3>Документация</h3>
-      <ul>
-        {documentation.map((doc, index) => (
-          <li key={index}>
-            <a href={doc} target="_blank" rel="noopener noreferrer">Документ {index + 1}</a>
-          </li>
-        ))}
-      </ul>
+            <h3>Видео с курса</h3>
+            <div className="video-list">
+                {videoLinks.length > 0 ? (
+                    videoLinks.map((video, index) => (
+                        <video key={index} controls width="600">
+                            <source src={`${video}`} type="video/mp4" />
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    ))
+                ) : (
+                    <p>Видео не доступны.</p>
+                )}
+            </div>
+            <button>Просмотреть все видео</button> {/* Кнопка для просмотра всех видео */}
 
-      <button onClick={handleBack}>Назад к списку</button>
-     
-    </div>
-  );
+            <h3>Документация</h3>
+            <ul>
+                {documentationLinks.length > 0 ? (
+                    documentationLinks.map((doc, index) => (
+                        <li key={index}>
+                            <a href={`${doc}`} target="_blank" rel="noopener noreferrer">
+                                Документ {index + 1}
+                            </a>
+                        </li>
+                    ))
+                ) : (
+                    <p>Документация не доступна.</p>
+                )}
+            </ul>
+
+            <h3>Уроки</h3>
+            <ul>
+                {lessons.map((lesson, index) => (
+                    <li key={index}>{lesson}</li>
+                ))}
+            </ul>
+
+            <button onClick={handleBack}>Назад к списку</button>
+        </div>
+    );
 };
 
 export default CourseDetail;

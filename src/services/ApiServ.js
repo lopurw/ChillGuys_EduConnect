@@ -28,4 +28,17 @@ export const login = async (userData) => {
     return response.data;
 };
 
+export const getAllCourses = async (pageNumber = 1, pageSize = 100) => {
+    const params = {
+        pageNumber: pageNumber,
+        pageSize: pageSize
+    };
 
+    const response = await apiClient.get('Course/getCourses', { params });
+    return response.data;
+};
+
+export const getCourseById = async (id) => {
+    const response = await apiClient.get(`Course/getCourseById?id=${id}`);
+    return response.data;
+}
