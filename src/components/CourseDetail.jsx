@@ -81,7 +81,6 @@ const CourseDetail = () => {
   };
 
   return (
-    <>
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <div className={classes.course_detail}>
@@ -130,9 +129,6 @@ const CourseDetail = () => {
           </div>
         </div>
       </div>
-
-      
-</>
 
   );
 };

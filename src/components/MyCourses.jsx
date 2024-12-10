@@ -1,5 +1,6 @@
 import React from "react";
 import CourseCard from "./CourseCard";
+import classes from '../styles/MyCourses.module.css';
 
 const MyCourses = () => {
   
@@ -37,7 +38,7 @@ const MyCourses = () => {
   };
 
   return (
-    <div className="my-courses">
+    <div className={classes.my_courses_wrapper}>
       {courses.map((course) => (
         <CourseCard
           key={course.id}
