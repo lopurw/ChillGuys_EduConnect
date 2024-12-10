@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { register } from '../services/ApiServ';
 import StatisticsChart from '../components/StatisticsUserHome';
@@ -30,10 +31,15 @@ const HomeUser = () => {
 					{' '}
 					<img src="/public/project.png" alt="" /> Проекты
 				</button>
+        <NavLink
+          to="/mycourses" 
+          className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
+        >
 				<button className={classes.button}>
 					{' '}
 					<img src="/public/courses.png" alt="" /> Мои курсы
 				</button>
+        </NavLink>
     </div>
     <StatisticsChart></StatisticsChart>
 </div>
@@ -44,3 +50,4 @@ const HomeUser = () => {
 };
 
 export default HomeUser;
+
