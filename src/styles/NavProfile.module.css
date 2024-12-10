@@ -1,0 +1,112 @@
+/* NavProfile.module.css */
+
+/* Main wrapper for the entire profile page */
+.container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  /* Sidebar navigation */
+  .sidebar {
+    width: 200px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar button {
+    width: 100%;
+    padding: 10px;
+   
+    color: white;
+    border: none;
+    
+    cursor: pointer;
+    text-align: left;
+  }
+  
+
+ 
+  .mainContent {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+  }
+  
+  .mainContent h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .mainContent div {
+    margin-bottom: 10px;
+  }
+  
+  .mainContent input {
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .mainContent img {
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .mainContent button {
+    padding: 10px 20px;
+   
+    color: white;
+   
+    cursor: pointer;
+  }
+  
+ 
+  
+  .mainContent p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .mainContent h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Button for downloading the portfolio */
+  .downloadButton {
+    padding: 10px 20px;
+    background-color: #FFD700;
+   
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .downloadButton:hover {
+    background-color: #FFCC00;
+  }
+  

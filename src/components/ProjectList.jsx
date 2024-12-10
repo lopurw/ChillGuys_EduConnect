@@ -34,13 +34,13 @@ const ProjectList = () => {
 
 	const handleStartProject = (project) => {
 		setSelectedProject(project);
-		// Дополнительная логика для начала работы с проектом, например переход на страницу проекта
+		
 		console.log('Перешли на проект', project);
 	};
 
 	return (
 		<div className="project-list">
-			<h2>Мои проекты</h2> {/* Заголовок "Мои проекты" */}
+			<h2>Мои проекты</h2> 
 			<div className="project-cards">
 				{projects.length > 0 ? (
 					projects.map((project) => (

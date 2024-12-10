@@ -130,6 +130,27 @@ const CourseDetail = () => {
         </div>
       </div>
 
+      <h3>Видео с курса</h3>
+      <div className="video-list">
+        {videos.slice(0, 3).map((video, index) => (
+          <video key={index} controls>
+            <source src={video} type="video/mp4" />
+            Ваш браузер не поддерживает видео.
+          </video>
+        ))}
+      </div>
+      <button>Просмотреть все видео</button> 
+
+      <h3>Документация</h3>
+      <ul>
+        {documentation.map((doc, index) => (
+          <li key={index}>
+            <a href={doc} target="_blank" rel="noopener noreferrer">Документ {index + 1}</a>
+          </li>
+        ))}
+      </ul>
+
+
   );
 };
 
