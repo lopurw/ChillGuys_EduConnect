@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
+import classes from '../styles/CoursesCard.module.css';
 const CourseCard = ({ course, onStartCourse, showProgress }) => {
   return (
-    <div className="course-card">
+    <div className={classes.course_card}>
       <img src={course.image} alt={course.title} className="course-image" />
       <h3 className="course-title">{course.title}</h3>
       <p className="course-description">{course.description}</p>

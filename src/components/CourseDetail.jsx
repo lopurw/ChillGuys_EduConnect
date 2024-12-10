@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import img from './images.jpg'
 import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png'
+import classes from '../styles/CoursesDetail.module.css';
 
 const CourseDetail = () => {
   const { id } = useParams(); 
@@ -16,7 +17,7 @@ const CourseDetail = () => {
       duration: '10 часов',
       category: 'Frontend',
       instructor: 'Иван Иванов',
-      instructorImage: './images.jpg', 
+      instructorImage: '/public/images.jpg',
       videos: [
         '/public/sample-5s.mp4',
         '/public/sample-5s.mp4',
@@ -80,16 +81,23 @@ const CourseDetail = () => {
   };
 
   return (
-    <div className="course-detail">
-        
-        <img src={image} alt={title} className="course-image" />
-
+    <div className={classes.course_detail}>
       <h2>{title}</h2>
-      <p>{description}</p>
-      <p><strong>Время на прохождение:</strong> {duration}</p>
-      <p><strong>Преподаватель:</strong> {instructor}</p>
-      <img src={instructorImage} alt={instructor} className="instructor-image" />
-      
+      <div className={classes.course_detail_header}>
+        <div className={classes.course_detail_header_item}>
+          <img src={image} alt={title} className="course-image" />
+          <div className={classes.course_detail_header_item_text}>
+            <p>{description}</p>
+            <p><strong>Время на прохождение:</strong> {duration}</p>
+          </div>
+        </div>
+        <div className={classes.course_detail_header_item}>
+          <img src={instructorImage} alt={instructor} className="instructor-image" />
+          <div className={classes.course_detail_header_item_text}>
+            <p><strong>Преподаватель:</strong> {instructor}</p>
+          </div>
+        </div>
+      </div>
       <h3>Видео с курса</h3>
       <div className="video-list">
         {videos.slice(0, 3).map((video, index) => (
