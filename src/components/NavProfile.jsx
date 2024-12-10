@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import html2pdf from 'html2pdf.js'; 
 
 import CourseList from './CourseList';
+import MyCourses from './MyCourses';
+import styles from '../styles/NavProfile.module.css'; 
 
 const NavProfile = () => {
-  const [role, setRole] = useState('студент');
+  const [role, setRole] = useState('работодатель');
   const [selectedTab, setSelectedTab] = useState('personalInfo');
   const [isEditable, setIsEditable] = useState(false);
   const [userData, setUserData] = useState({
@@ -13,7 +16,7 @@ const NavProfile = () => {
     lastName: 'Иванов',
     middleName: 'Иванович',
     birthDate: '01.01.1990',
-    photo: 'https://via.placeholder.com/100',
+    photo: 'https://via.placeholder.com/100', 
     institution: 'МГУ',
     company: 'ООО Рога и Копыта',
     contactNumber: '123-456-7890',
@@ -28,6 +31,20 @@ const NavProfile = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUserData((prevData) => ({
+          ...prevData,
+          photo: reader.result, 
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const getTabs = () => {
@@ -48,7 +65,20 @@ const NavProfile = () => {
           <div>
             <h3>Личная информация</h3>
             <div>
-              <img src={userData.photo} alt="Фото профиля" width={100} height={100} />
+              <img
+                src={userData.photo}
+                alt="Фото профиля"
+                width={100}
+                height={100}
+                onClick={() => document.getElementById('photoInput').click()} 
+              />
+              <input
+                id="photoInput"
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }} 
+                onChange={handleFileChange} 
+              />
             </div>
             <div>
               <div>
@@ -89,31 +119,62 @@ const NavProfile = () => {
               <div>
                 Контактный номер: {isEditable ? <input type="text" name="contactNumber" value={userData.contactNumber} onChange={handleInputChange} /> : userData.contactNumber}
               </div>
-              <button onClick={() => setIsEditable(!isEditable)}>
+              <button onClick={() => setIsEditable(!isEditable)} className={styles.mainContentButton}>
                 {isEditable ? 'Сохранить изменения' : 'Редактировать'}
               </button>
             </div>
           </div>
         );
-      case 'portfolio':
-        return (
-          <div>
-            <h3>Портфолио</h3>
-            <div>
-              <img src={userData.photo} alt="Фото профиля" width={100} height={100} />
-            </div>
-            <div>
-              <p>Имя: {userData.firstName} {userData.lastName} {userData.middleName}</p>
-              <p>Стек технологий: {userData.techStack}</p>
-              <p>Уровень английского: {userData.englishLevel}</p>
-              <p>Дополнительная информация: {userData.additionalInfo}</p>
-              <h4>Курсы:</h4>
-              <CourseList />
-            </div>
-          </div>
-        );
+        case 'portfolio':
+            return (
+              <div id="portfolio-content" className={styles.mainContent}>
+                <h3>Портфолио</h3>
+                <div>
+                  <img src={userData.photo} alt="Фото профиля" width={100} height={100} />
+                </div>
+                <div>
+                  <p>Имя: {userData.firstName} {userData.lastName} {userData.middleName}</p>
+                  <p>Стек технологий: {userData.techStack}</p>
+                  <p>Уровень английского: {isEditable ? (
+                    <select name="englishLevel" value={userData.englishLevel} onChange={handleInputChange}>
+                      <option value="Beginner">Начальный</option>
+                      <option value="Intermediate">Средний</option>
+                      <option value="Advanced">Продвинутый</option>
+                      <option value="Fluent">Свободно</option>
+                    </select>
+                  ) : userData.englishLevel}</p>
+                  <p>Дополнительная информация: {isEditable ? (
+                    <input type="text" name="additionalInfo" value={userData.additionalInfo} onChange={handleInputChange} />
+                  ) : userData.additionalInfo}</p>
+                  <div>
+                    <div>
+                      Зарплата: {isEditable ? (
+                        <input type="number" name="salary" value={userData.salary} onChange={handleInputChange} />
+                      ) : userData.salary}
+                    </div>
+                    <div>
+                      Расписание: {isEditable ? (
+                        <input type="text" name="schedule" value={userData.schedule} onChange={handleInputChange} />
+                      ) : userData.schedule}
+                    </div>
+                    <div>
+                      Страна: {isEditable ? (
+                        <input type="text" name="country" value={userData.country} onChange={handleInputChange} />
+                      ) : userData.country}
+                    </div>
+                  </div>
+                  <h4>Курсы:</h4>
+                  <MyCourses />
+                </div>
+                <button onClick={downloadPortfolio} className={styles.downloadButton}>Скачать PDF</button>
+                <button onClick={() => setIsEditable(!isEditable)} className={styles.mainContentButton}>
+                  {isEditable ? 'Сохранить изменения' : 'Редактировать'}
+                </button>
+              </div>
+            );
+          
       case 'myCourses':
-        return <CourseList />;
+        return <MyCourses />;
       case 'projects':
         return <div>Заглушка для проектов</div>;
       case 'vacancies':
@@ -123,14 +184,26 @@ const NavProfile = () => {
     }
   };
 
+  const downloadPortfolio = () => {
+    const element = document.getElementById('portfolio-content');
+    const opt = {
+      margin: 1,
+      filename: 'portfolio.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+    };
+    html2pdf().from(element).set(opt).save();
+  };
+
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '200px', padding: '10px' }}>
+    <div className={styles.container}>
+      <div className={styles.sidebar}>
         <h2>Навигация</h2>
         <ul>
           {getTabs().map((tab) => (
             <li key={tab}>
-              <button onClick={() => setSelectedTab(tab)}>
+              <button onClick={() => setSelectedTab(tab)} className={styles.sidebarButton}>
                 {tab === 'personalInfo' ? 'Личная информация' :
                  tab === 'portfolio' ? 'Портфолио' :
                  tab === 'myCourses' ? 'Мои курсы' :
@@ -141,7 +214,7 @@ const NavProfile = () => {
         </ul>
       </div>
 
-      <div style={{ padding: '10px', flex: 1 }}>
+      <div className={styles.mainContent}>
         {renderTabContent()}
       </div>
     </div>

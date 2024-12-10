@@ -49,7 +49,7 @@ const ProjectDetail = () => {
 	const { title, description, category, tasks, additionalMaterials, comments, image } = project;
 
 	const handleBack = () => {
-		navigate(-1); // Вернуться на предыдущую страницу в истории браузера
+		navigate(-1); 
 	};
 
 	const handleAddComment = () => {
