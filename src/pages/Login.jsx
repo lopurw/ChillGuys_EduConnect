@@ -22,6 +22,7 @@ const Login = () => {
 			const response = await login(formData);
 			setSuccess('Вход выполнен успешно!');
 			console.log('Ответ сервера:', response);
+			localStorage.setItem('userName', formData.userName);
 			localStorage.setItem('userRole', response.data.role);
 			localStorage.setItem('userId', response.data.userId);
 			localStorage.setItem('token', response.data.token);

@@ -1,23 +1,16 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+# Build Stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["EduConnect.csproj", "./"]
-RUN dotnet restore "EduConnect.csproj"
+WORKDIR /source
 COPY . .
-WORKDIR "/src/"
-RUN dotnet build "EduConnect.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet restore "./backend\backend\EduConnect.csproj" --disable-parallel
+RUN dotnet publish "./backend\backend\EduConnect.csproj" -c release -o /app --no-restore
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "EduConnect.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
+# Serve Stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app ./
+
+EXPOSE 5220
+EXPOSE 5221
+
 ENTRYPOINT ["dotnet", "EduConnect.dll"]

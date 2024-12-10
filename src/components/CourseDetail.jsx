@@ -73,7 +73,7 @@ const CourseDetail = () => {
 
     return (
         <div className="course-detail">
-            <img src={image} alt={title} className="course-image" />
+            {/*<img src={image} alt={title} className="course-image" />*/}
 
             <h2>{title}</h2>
             <p>{description}</p>

@@ -33,7 +33,7 @@ try
 {
     var serviceProvider = app.Services.CreateScope().ServiceProvider;
     var dataContext = serviceProvider.GetRequiredService<DataContext>();
-    // await dataContext.Database.MigrateAsync();
+    await dataContext.Database.MigrateAsync();
 
     // seed data
     var seeder = serviceProvider.GetRequiredService<Seeder>();
