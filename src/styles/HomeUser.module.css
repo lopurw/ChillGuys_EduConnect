@@ -12,6 +12,7 @@
 	display: flex;
 	gap: 20px;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 .button {
 	background: var(--green-color);
@@ -21,8 +22,19 @@
 	padding: 10px 20px;
 	font-size: 20px;
 	transition: all 0.2s ease-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.2s ease-out;
+	width: 186px;
+	gap: 10px;
+}
+.button:hover {
+	scale: 1.05;
+	transform: translateY(-5px);
 }
 .button img {
-	width: 50px;
+	width: auto;
 	height: 50px;
 }
