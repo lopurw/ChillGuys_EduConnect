@@ -1,0 +1,13 @@
+.main {
+	display: flex;
+	align-items: center;
+	justify-self: center;
+	flex-direction: column;
+	padding: 20px;
+	gap: 20px;
+}
+.buttons_container {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
