@@ -11,7 +11,7 @@ const Navbar = () => {
             to="/"
             className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
           >
-            Home
+            EduConnect
           </NavLink>
         </li>
         <li className="navItem">
@@ -19,7 +19,7 @@ const Navbar = () => {
             to="/login"
             className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
           >
-            Login
+            Вход
           </NavLink>
         </li>
         <li className="navItem">
@@ -27,7 +27,7 @@ const Navbar = () => {
             to="/register"
             className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
           >
-            Register
+            Регистрация
           </NavLink>
         </li>
       </ul>
