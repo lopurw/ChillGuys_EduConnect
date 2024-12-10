@@ -27,7 +27,6 @@ const Login = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setError('');
@@ -42,7 +41,6 @@ const Login = () => {
 		}
 	};
 
-
 	return (
 		<div className={classes.main}>
 			<form onSubmit={handleSubmit} className={classes.form}>
@@ -51,18 +49,20 @@ const Login = () => {
 				{error && <p style={{ color: 'red' }}>{error}</p>}
 				{success && <p style={{ color: 'green' }}>{success}</p>}
 
-				<div className={classes.form_container}>
-					<label>
-						Электронная почта
-						<input type="email" name="email" value={formData.email} onChange={handleChange} required />
-					</label>
-				</div>
+				<div className={classes.inputs_container}>
+					<div className={classes.form_container}>
+						<label>
+							Электронная почта
+							<input type="email" name="email" value={formData.email} onChange={handleChange} required />
+						</label>
+					</div>
 
-				<div className={classes.form_container}>
-					<label>
-						Пароль
-						<input type="password" name="password" value={formData.password} onChange={handleChange} required />
-					</label>
+					<div className={classes.form_container}>
+						<label>
+							Пароль
+							<input type="password" name="password" value={formData.password} onChange={handleChange} required />
+						</label>
+					</div>
 				</div>
 
 				<button className={classes.button} type="submit">
