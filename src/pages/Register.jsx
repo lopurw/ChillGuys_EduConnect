@@ -60,79 +60,80 @@ const Register = () => {
 				{error && <p style={{ color: 'red' }}>{error}</p>}
 				{success && <p style={{ color: 'green' }}>{success}</p>}
 
-				<div className={classes.form_container}>
-					<label>
-						Имя:
-						<input type="text" name="name" value={formData.name} onChange={handleChange} required />
-					</label>
-				</div>
-
-				<div className={classes.form_container}>
-					<label>
-						Электронная почта:
-						<input type="email" name="email" value={formData.email} onChange={handleChange} required />
-					</label>
-				</div>
-
-				<div className={classes.form_container}>
-					<label>
-						Пароль:
-						<input type="password" name="password" value={formData.password} onChange={handleChange} required />
-					</label>
-				</div>
-
-				<div className={classes.form_container}>
-					<label>
-						Подтвердите пароль:
-						<input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-					</label>
-				</div>
-
-				<div className={classes.form_container}>
-					<label>
-						Роль:
-						<select name="role" value={role} onChange={handleRoleChange} required>
-							<option value="user">Пользователь</option>
-							<option value="teacher">Преподаватель</option>
-							<option value="employer">Работодатель</option>
-						</select>
-					</label>
-				</div>
-
-				{role === 'teacher' && (
+				<div className={classes.inputs_container}>
 					<div className={classes.form_container}>
 						<label>
-							Специализация:
-							<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Например, Математика, Физика" required />
+							Имя
+							<input type="text" name="name" value={formData.name} onChange={handleChange} required />
 						</label>
 					</div>
-				)}
 
-				{role === 'employer' && (
 					<div className={classes.form_container}>
 						<label>
-							Название компании:
-							<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Введите название компании" required />
+							Электронная почта
+							<input type="email" name="email" value={formData.email} onChange={handleChange} required />
 						</label>
 					</div>
-				)}
 
-				{role === 'user' && (
 					<div className={classes.form_container}>
 						<label>
-							Хобби или интересы:
-							<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Например, чтение, походы" />
+							Пароль
+							<input type="password" name="password" value={formData.password} onChange={handleChange} required />
 						</label>
 					</div>
-				)}
 
-				<div className={classes.form_container}>
-					<label>
-						Доп. информация:
-						<textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} placeholder="Расскажите о себе" />
-					</label>
+					<div className={classes.form_container}>
+						<label>
+							Подтвердите пароль
+							<input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
+						</label>
+					</div>
+
+					<div className={classes.form_container}>
+						<label>
+							Роль
+							<select name="role" value={role} onChange={handleRoleChange} required>
+								<option value="user">Пользователь</option>
+								<option value="teacher">Преподаватель</option>
+								<option value="employer">Работодатель</option>
+							</select>
+						</label>
+					</div>
+
+					{role === 'teacher' && (
+						<div className={classes.form_container}>
+							<label>
+								Специализация
+								<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Например, Математика, Физика" required />
+							</label>
+						</div>
+					)}
+
+					{role === 'employer' && (
+						<div className={classes.form_container}>
+							<label>
+								Название компании
+								<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Введите название компании" required />
+							</label>
+						</div>
+					)}
+
+					{role === 'user' && (
+						<div className={classes.form_container}>
+							<label>
+								Хобби или интересы
+								<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Например, чтение, походы" />
+							</label>
+						</div>
+					)}
+
+					<div className={classes.form_container}>
+						<label>
+							Доп. информация
+							<textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} placeholder="Расскажите о себе" />
+						</label>
+					</div>
 				</div>
-
 				<button type="submit" className={classes.button}>
 					Зарегистрироваться
 				</button>
