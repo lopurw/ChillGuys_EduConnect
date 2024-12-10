@@ -13,6 +13,3 @@ const apiClient = axios.create({    baseURL: 'http://localhost:2211/api',
             const response = await apiClient.post('/Auth/Login', userData);
             return response.data;
           };
-
-
-          
