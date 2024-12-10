@@ -1,19 +1,35 @@
-
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Navbar.css'; 
+import '../styles/Navbar.css';
 
 const Navbar = () => {
+  const [role, setRole] = useState('Студент');
+
+  
+
   return (
     <nav className="navbar">
       <ul className="navList">
-        <li className="navItem">
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
-          >
-            EduConnect
-          </NavLink>
-        </li>
+        
+        {role === 'Студент' ? (
+          <li className="navItem">
+            <NavLink
+              to="/homeuser"
+              className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
+            >
+               EduConnect1
+            </NavLink>
+          </li>
+        ) : (
+          <li className="navItem">
+            <NavLink
+              to="/home"
+              className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
+            >
+              Home
+            </NavLink>
+          </li>
+        )}
         <li className="navItem">
           <NavLink
             to="/login"
