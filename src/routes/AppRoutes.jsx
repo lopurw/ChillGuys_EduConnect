@@ -7,6 +7,7 @@ import HomeUser from '../pages/HomeUser';
 import Home from '../pages/Home';
 import CourseList from '../components/CourseList';
 import CourseDetail from '../components/CourseDetail';
+import MyCourses from '../components/MyCourses';
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,8 @@ const AppRoutes = () => {
         <Route path="/homeuser" element={<HomeUser />} />
         <Route path="/coursesuser" element={<CourseList />} />
         <Route path="/course/:id" element={<CourseDetail />} />
+        <Route path="/mycourses" element={<MyCourses />} />
+
       </Routes>
    
   );
