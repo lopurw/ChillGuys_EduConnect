@@ -11,3 +11,39 @@ services:
       - .:/app
       - /app/node_modules
     command: npm run dev
+  backend:
+    build:
+      context: .
+      dockerfile: backend/backend/Dockerfile
+    networks:
+      - minionetwork
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5220
+      - ConnectionStrings__Connection=Server=postgres:5432;User Id=postgres;Password=postgrespw;Database=Gym_system_db
+      - Kestrel__Endpoints__WebApi__Protocols=Http1
+      - Kestrel__Endpoints__WebApi__Url=Http://+:5220
+    ports:
+      - 5220:5220
+    depends_on:
+      - postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
+  postgres:
+    image: postgres
+    networks:
+      - minionetwork
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+networks:
+  minionetwork:
+    driver: bridge
+volumes:
+  pgdata:
