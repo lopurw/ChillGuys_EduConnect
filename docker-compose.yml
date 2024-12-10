@@ -1,0 +1,13 @@
+services:
+  react-app-dockerize:
+    container_name: react-docker
+    image: react-docker-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
