@@ -20,7 +20,7 @@ const MyCourses = () => {
             description: course.description || 'Описание отсутствует',
             duration: course.duration || '10 часов', // Replace with actual value if available
             category: course.category || 'Programming', // Replace with actual category if available
-            progress: course.progress || 0, // Assuming the API provides progress value
+            progress: course.score / course.totalLessons || 0, // Assuming the API provides progress value
             image: course.image || 'https://via.placeholder.com/150', // Replace with actual image if available
           }));
           setCourses(formattedCourses);

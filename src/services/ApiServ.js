@@ -53,3 +53,19 @@ export const getCourseById = async (id) => {
     const response = await apiClient.get(`Course/getCourseById?id=${id}`);
     return response.data;
 }
+
+export const completeLesson = async ({ studentId, lessonId }) => {
+    const payload = {
+        studentId: studentId,
+        lessonId: lessonId
+    };
+
+    const response = await apiClient.post('Course/completeLesson', payload);
+    return response.data;
+};
+
+export const fetchCourseStats = async () => {
+
+    const response = await apiClient.get(`Course/courseCompletionStats?studentId=${localStorage.getItem('userId')}`);
+    return response.data;
+};

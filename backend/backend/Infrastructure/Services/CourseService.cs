@@ -32,6 +32,42 @@ public class CourseService(DataContext context)
         }
     }
 
+    public async Task<Response<bool>> CompleteLessonAsync(int studentId, int lessonId)
+    {
+        
+        try
+        {
+            var lesson = await context.Lessons
+                .Where(l => l.Id == lessonId)
+                .FirstOrDefaultAsync();
+
+            if (lesson == null)
+            {
+                return new Response<bool>(HttpStatusCode.NotFound, "Lesson not found");
+            }
+
+            // Optionally, check if the student is enrolled in the course before marking the lesson complete
+            var courseEnrollment = await context.StudentCourses
+                .Include( sc => sc.Course)
+                .FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.Course.Id == lesson.CourseId);
+
+            if (courseEnrollment == null)
+            {
+                return new Response<bool>(HttpStatusCode.NotFound, "Student is not enrolled in the course");
+            }
+
+            // Mark the lesson as completed
+            lesson.IsCompleted = true;
+            context.Lessons.Update(lesson);
+            await context.SaveChangesAsync();
+
+            return new Response<bool>(true);
+        }
+        catch (Exception ex)
+        {
+            return new Response<bool>(HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
     public async Task<PagedResponse<List<GetCoursesDto>>> GetCoursesAsync(int pageNumber = 1, int pageSize = 1)
     {
         try
@@ -108,6 +144,8 @@ public class CourseService(DataContext context)
                 VideoUrl = course.VideoUrl,
                 DocumentationUrl = course.DocumentationUrl,
                 TeacherName = course.Teacher.Name,
+                Score = course.Lessons.Count(l => l.IsCompleted) - course.Lessons.Count(l => !l.IsCompleted),
+                TotalLessons = course.Lessons.Count(),
                 Students = course.Students.Select(sc => new StudentDto
                 {
                     Id = sc.Student.Id,
@@ -125,7 +163,40 @@ public class CourseService(DataContext context)
         }
     }
 
+    public async Task<Response<StudentCourseCompletionStats>> GetStudentCourseCompletionStatsAsync(int studentId)
+    {
+        try
+        {
+            // Filter courses for the specified student
+            var courses = await context.Courses
+                .Where(c => c.Students.Any(sc => sc.StudentId == studentId)) // Filter by student ID
+                .Include(c => c.Lessons)
+                .ToListAsync();
 
+            // Calculate completion stats
+            var completedCourses = courses.Count(course =>
+                course.Lessons.Any() && // Проверяем, есть ли уроки у курса
+                course.Lessons.Count(l => l.IsCompleted) == course.Lessons.Count);
+
+            
+            var notCompletedCourses = courses.Count - completedCourses;
+
+            // Return the stats
+            var stats = new StudentCourseCompletionStats
+            {
+                CompletedCourses = completedCourses,
+                NotCompletedCourses = notCompletedCourses
+            };
+
+            return new Response<StudentCourseCompletionStats>(stats);
+        }
+        catch (Exception ex)
+        {
+            return new Response<StudentCourseCompletionStats>(HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
+
+// DTO for the respo
 
     public async Task<Response<GetCourseDto>> GetCourseByIdAsync(int id)
     {
@@ -147,7 +218,7 @@ public class CourseService(DataContext context)
                 VideoUrl = course.VideoUrl,
                 DocumentationUrl = course.DocumentationUrl,
                 TeacherName = course.Teacher?.Name,
-                Lessons = course.Lessons?.Select(l => l.Title).ToList(),
+                Lessons = course.Lessons?.Select(c => new GetCourseLessonDto() { Id = c.Id, Title = c.Title, isCompleted = c.IsCompleted}).ToList(),
                 CreatedAt = course.CreatedAt,
                 UpdatedAt = course.UpdatedAt
             };
@@ -343,7 +414,8 @@ public class CourseService(DataContext context)
                 Content = lesson.Content,
                 Resources = lesson.Resources,
                 CreatedAt = lesson.CreatedAt,
-                UpdatedAt = lesson.UpdatedAt
+                UpdatedAt = lesson.UpdatedAt,
+                isCompleted = lesson.IsCompleted
             };
 
             return new Response<GetLessonDto>(lessonDto);
@@ -371,7 +443,8 @@ public class CourseService(DataContext context)
                 Content = lesson.Content,
                 Resources = lesson.Resources,
                 CreatedAt = lesson.CreatedAt,
-                UpdatedAt = lesson.UpdatedAt
+                UpdatedAt = lesson.UpdatedAt,
+                isCompleted = lesson.IsCompleted
             }).ToList();
 
             return new Response<List<GetLessonDto>>(lessonDtos);
@@ -451,6 +524,8 @@ public class GetCoursesDto
     public string Title { get; set; }
     public string Description { get; set; }
     public string VideoUrl { get; set; }
+    public int Score { get; set; } = 0;
+    public int TotalLessons { get; set; } = 0;
     public string DocumentationUrl { get; set; }
     public int TeacherId { get; set; }
     public string TeacherName { get; set; }
@@ -486,6 +561,7 @@ public class GetLessonDto
 {
     public int Id { get; set; }
     public int CourseId { get; set; }
+    public bool isCompleted { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
     public string[] Resources { get; set; }
@@ -501,9 +577,22 @@ public class GetCourseDto
     public string TeacherName { get; set; }
     public string VideoUrl { get; set; }
     public string DocumentationUrl { get; set; }
-    public List<string> Lessons { get; set; }
+    public List<GetCourseLessonDto> Lessons { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+}
+
+public class GetCourseLessonDto
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public bool isCompleted { get; set; }
+}
+
+public class StudentCourseCompletionStats
+{
+    public int CompletedCourses { get; set; }
+    public int NotCompletedCourses { get; set; }
 }
 
 

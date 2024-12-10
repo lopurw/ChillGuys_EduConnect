@@ -126,9 +126,44 @@ public class CourseController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPost("completeLesson")]
+    public async Task<IActionResult> CompleteLesson(CompleteLessonRequest request)
+    {
+        if (request.StudentId <= 0 || request.LessonId <= 0)
+        {
+            return BadRequest("Invalid student or lesson ID.");
+        }
+
+        var response = await _courseService.CompleteLessonAsync(request.StudentId, request.LessonId);
+
+        if (response.StatusCode == 200)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return StatusCode((int)response.StatusCode, response);
+        }
+    }
+    
+    [HttpGet("courseCompletionStats")]
+    public async Task<IActionResult> GetCourseCompletionStats(int studentId)
+    {
+        var result = await _courseService.GetStudentCourseCompletionStatsAsync(studentId);
+
+        if (result.StatusCode == 200)
+            return Ok(result.Data);
+        else
+            return StatusCode((int)result.StatusCode);
+    }
     #endregion
 }
 
+public class CompleteLessonRequest
+{
+    public int StudentId { get; set; }
+    public int LessonId { get; set; }
+}
 public class JoinCourseRequest
 {
     public int StudentId { get; set; }

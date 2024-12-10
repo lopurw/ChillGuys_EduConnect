@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png';
-import { getCourseById } from "../services/ApiServ.js";
+import { getCourseById, completeLesson } from "../services/ApiServ.js";
 
 const CourseDetail = () => {
     const { id } = useParams(); // Get course ID from URL
@@ -31,6 +30,32 @@ const CourseDetail = () => {
         navigate('/');  // Navigate back to the homepage
     };
 
+    // Function to mark a lesson as completed
+    const handleCompleteLesson = async (lessonId) => {
+        try {
+            const studentId = localStorage.getItem('userId'); // Retrieve the student ID from localStorage
+            if (!studentId) throw new Error("Student ID is missing.");
+
+            const response = await completeLesson({ studentId, lessonId }); // Call the API to mark the lesson as completed
+            window.location.reload();
+            if (response.status === 200) {
+                alert('Lesson marked as completed!');
+                // Optionally, update the local state to reflect the change
+                setCourse((prev) => ({
+                    ...prev,
+                    lessons: prev.lessons.map((lesson) =>
+                        lesson.id === lessonId ? { ...lesson, isCompleted: true } : lesson
+                    ),
+                }));
+
+            } else {
+                console.error('Failed to complete lesson:', response);
+            }
+        } catch (error) {
+            console.error('Error completing lesson:', error);
+        }
+    };
+
     if (loading) {
         return <p>Загрузка данных курса...</p>; // Show loading message
     }
@@ -41,7 +66,6 @@ const CourseDetail = () => {
 
     // Destructure course data
     const { title, description, teacherName, lessons, createdAt, updatedAt, videoUrl, documentationUrl } = course;
-    console.log(course);
 
     // Assuming videoUrl and documentationUrl are directories or paths to content in the public folder
     const videoLinks = videoUrl ? videoUrl.split(',') : [];
@@ -89,8 +113,15 @@ const CourseDetail = () => {
 
             <h3>Уроки</h3>
             <ul>
-                {lessons.map((lesson, index) => (
-                    <li key={index}>{lesson}</li>
+                {lessons.map((lesson) => (
+                    <li key={lesson.id}>
+                        {lesson.title}
+                        {lesson.isCompleted ? (
+                            <span> (Завершен)</span>
+                        ) : (
+                            <button onClick={() => handleCompleteLesson(lesson.id)}>Завершить</button>
+                        )}
+                    </li>
                 ))}
             </ul>
 
