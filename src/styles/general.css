@@ -6,7 +6,8 @@
 }
 
 /* Reset */
-html, body {
+html,
+body {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -17,16 +18,20 @@ body {
 	line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
 	list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
 	quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
@@ -34,4 +39,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+.link,
+.activeLink {
+	text-decoration: none;
 }
