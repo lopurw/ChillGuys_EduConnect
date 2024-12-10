@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUser(null); 
-	setRole('');
+    setRole('');
   };
 
   return (
@@ -43,12 +43,14 @@ const Navbar = () => {
             <div className={classes.side_buttons}>
               {isLoggedIn ? (
                 <div className={classes.logged_in}>
-                  <img
-                    src={user.avatar}
-                    alt="User Avatar"
-                    className={classes.avatar}
-                  />
-                  <span className={classes.user_name}>{user.name}</span>
+                  <NavLink to="/myprofile" className={classes.profile_link}>
+                    <img
+                      src={user.avatar}
+                      alt="User Avatar"
+                      className={classes.avatar}
+                    />
+                    <span className={classes.user_name}>{user.name}</span>
+                  </NavLink>
                   <button
                     onClick={handleLogout}
                     className={classes.logout_button}
