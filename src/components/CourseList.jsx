@@ -3,6 +3,7 @@ import CourseCard from './CourseCard';
 import { Link } from 'react-router-dom'; 
 import CourseDetail from './CourseDetail';
 import classes from '../styles/CoursesList.module.css';
+import Video from './Video';
 
 const CourseList = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -139,6 +140,7 @@ const CourseList = () => {
             </div>
           </div>
         </div>
+        <Video></Video>
       </div>
 
   );
