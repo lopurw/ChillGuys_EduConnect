@@ -7,10 +7,23 @@ const HomeUser = () => {
 		<div className={classes.main}>
 			<h1>Начинай обучение уже сейчас!</h1>
 			<div className={classes.buttons_container}>
-				<button className={classes.button}>Поиск курсов</button>
-				<button className={classes.button}>Вакансии</button>
-				<button className={classes.button}>Проекты</button>
-				<button className={classes.button}>Мои курсы</button>
+				<button className={classes.button}>
+					{' '}
+					<img src="/public/search.png" alt="" /> Поиск курсов
+				</button>
+				<button className={classes.button}>
+					{' '}
+					<img src="/public/vacancy.png" alt="" />
+					Вакансии
+				</button>
+				<button className={classes.button}>
+					{' '}
+					<img src="/public/project.png" alt="" /> Проекты
+				</button>
+				<button className={classes.button}>
+					{' '}
+					<img src="/public/courses.png" alt="" /> Мои курсы
+				</button>
 			</div>
 			<StatisticsChart></StatisticsChart>
 		</div>
