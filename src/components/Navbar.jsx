@@ -12,11 +12,12 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUser(null);
+    setUser(null); 
     setRole('');
   };
 
   return (
+
       <nav>
         <div className={classes.wrapper}>
           <div className={classes.container}>

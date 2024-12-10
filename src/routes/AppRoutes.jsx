@@ -8,6 +8,9 @@ import Home from '../pages/Home';
 import CourseList from '../components/CourseList';
 import CourseDetail from '../components/CourseDetail';
 import MyCourses from '../components/MyCourses';
+import Navbar from '../components/Navbar';
+import NavProfile from '../components/NavProfile';
+
 
 const AppRoutes = () => {
   return (
@@ -21,6 +24,7 @@ const AppRoutes = () => {
         <Route path="/coursesuser" element={<CourseList />} />
         <Route path="/course/:id" element={<CourseDetail />} />
         <Route path="/mycourses" element={<MyCourses />} />
+        <Route path="/myprofile" element={< NavProfile/>} />
 
       </Routes>
    
