@@ -9,6 +9,9 @@ import CourseDetail from '../components/CourseDetail';
 import ProjectList from '../components/ProjectList';
 import ProjectDetail from '../components/ProjectDetail';
 import Comment from '../components/Comment';
+import MyCourses from '../components/MyCourses';
+
+import NavProfile from '../components/NavProfile';
 
 const AppRoutes = () => {
 	return (
@@ -23,8 +26,8 @@ const AppRoutes = () => {
 			<Route path="/projectuser" element={<ProjectList />} />
 			<Route path="//project/:id" element={<ProjectDetail />} />
 			<Route path="comment" element={<Comment />} />
-        <Route path="/mycourses" element={<MyCourses />} />
-        <Route path="/myprofile" element={< NavProfile/>} />
+			<Route path="/mycourses" element={<MyCourses />} />
+			<Route path="/myprofile" element={< NavProfile/>} />
 		</Routes>
 	);
 };
