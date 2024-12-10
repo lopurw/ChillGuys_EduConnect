@@ -1,0 +1,67 @@
+@import url('Variables.css');
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    padding: 0 80px 0 80px;
+}
+
+button {
+    color: #fff;
+    background: #0fd306;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    transition: all 0.2s ease-out;
+}
+
+button:hover {
+    color: #fff;
+    background: #13c20a;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 35px;
+}
+
+.course_cards_wrapper {
+    width: 100%;
+}
+
+.filters > * {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.filters_item label {
+    margin-bottom: 10px;
+}
+
+.course_list {
+    width: 100%;
+    display: flex;
+    margin: 50px 0 50px 0;
+}
+
+.course_list a {
+    text-decoration: none;
+    color: #000;
+}
+
+.course_cards {
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+}
