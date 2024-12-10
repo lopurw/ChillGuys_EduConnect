@@ -23,6 +23,8 @@ const AppRoutes = () => {
 			<Route path="/projectuser" element={<ProjectList />} />
 			<Route path="//project/:id" element={<ProjectDetail />} />
 			<Route path="comment" element={<Comment />} />
+        <Route path="/mycourses" element={<MyCourses />} />
+        <Route path="/myprofile" element={< NavProfile/>} />
 		</Routes>
 	);
 };

@@ -27,10 +27,32 @@ nav {
 
 .side_buttons > * {
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .side_buttons .side_button:last-child {
     margin-right: 0;
+}
+
+.side_buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side_buttons a > * {
+    margin-right: 15px;
+}
+
+.side_buttons img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.side_buttons button i {
+    font-size: 12px;
 }
 
 .nav_wrapper a {

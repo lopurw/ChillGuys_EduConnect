@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CourseCard from './CourseCard';
 import { Link } from 'react-router-dom'; 
 import CourseDetail from './CourseDetail';
+import classes from '../styles/CoursesList.module.css';
 
 const CourseList = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -89,48 +90,57 @@ const CourseList = () => {
     
 
   return (
-    <div className="course-list">
-      <div className="filters">
-        <div>
-          <label>Категория:</label>
-          <select
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-          >
-            <option value="">Все</option>
-            <option value="Frontend">Frontend</option>
-            <option value="Programming">Programming</option>
-          </select>
-        </div>
+      <div className={classes.wrapper}>
+        <div className={classes.container}>
+          <div className={classes.course_list}>
+            <div className={classes.filters}>
+              <div className={classes.filters_item}>
+                <label>Категория:</label>
+                <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value)}
+                >
+                  <option value="">Все</option>
+                  <option value="Frontend">Frontend</option>
+                  <option value="Programming">Programming</option>
+                </select>
+              </div>
 
-        <div>
-          <label>Время на прохождение:</label>
-          <select
-            value={durationFilter}
-            onChange={(e) => setDurationFilter(e.target.value)}
-          >
-            <option value="">Все</option>
-            <option value="10 часов">10 часов</option>
-            <option value="15 часов">15 часов</option>
-            <option value="8 часов">8 часов</option>
-          </select>
-        </div>
+              <div className={classes.filters_item}>
+                <label>Время на прохождение:</label>
+                <select
+                    value={durationFilter}
+                    onChange={(e) => setDurationFilter(e.target.value)}
+                >
+                  <option value="">Все</option>
+                  <option value="10 часов">10 часов</option>
+                  <option value="15 часов">15 часов</option>
+                  <option value="8 часов">8 часов</option>
+                </select>
+              </div>
 
-        <button onClick={handleFilter}>Найти</button>
+              <button onClick={handleFilter}>Найти</button>
+            </div>
+
+            <div className={classes.course_cards_wrapper}>
+              <h2>Доступные курсы</h2>
+              <div className={classes.course_cards}>
+                {displayedCourses.length > 0 ? (
+                    displayedCourses.map((course) => (
+                        <Link to={`/course/${course.id}`} key={course.id}>
+                          <CourseCard course={course} />
+                        </Link>
+                    ))
+                ) : (
+                    <p>Совпадений не найдено</p>
+                )}
+            </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="course-cards">
-        {displayedCourses.length > 0 ? (
-          displayedCourses.map((course) => (
-            <Link to={`/course/${course.id}`} key={course.id}>  
-              <CourseCard course={course} />
-            </Link>
-          ))
-        ) : (
-          <p>Совпадений не найдено</p>
-        )}
-      </div>
-    </div>
   );
 };
 
