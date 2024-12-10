@@ -225,7 +225,9 @@ public class UserService(DataContext context, IConfiguration configuration)
     {
         var user = await context.Users
             .Include(u => u.Role)
-            .FirstOrDefaultAsync(x => x.Name == model.UserName && x.Password == HashPassword(model.Password));
+            .FirstOrDefaultAsync(x =>
+                (x.Name == model.UserName || x.Email == model.UserName) && // Проверка имени или почты
+                x.Password == HashPassword(model.Password));
 
         if (user == null)
         {
@@ -237,9 +239,10 @@ public class UserService(DataContext context, IConfiguration configuration)
         {
             Token = token,
             UserId = user.Id.ToString(),
-            Role = user.Role.GetType().Name // Return the role type (e.g., ManagerProfile, TeacherProfile, etc.)
+            Role = user.Role.GetType().Name // Возвращает тип роли (например, ManagerProfile, TeacherProfile и т.д.)
         });
     }
+
 
     private string GenerateJwtToken(User user)
     {

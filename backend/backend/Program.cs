@@ -43,6 +43,7 @@ catch (Exception)
 {
 }
 
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

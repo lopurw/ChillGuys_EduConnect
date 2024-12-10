@@ -3,14 +3,13 @@ import { NavLink } from 'react-router-dom';
 import classes from '../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const [role, setRole] = useState('Студент');
 
   return (
       <nav>
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <div className={classes.nav_wrapper}>
-              {role === 'Студент' ? (
+              {localStorage.getItem('userRole') === 'StudentProfile' ? (
                   <div>
                     <NavLink
                         to="/homeuser"
