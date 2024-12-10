@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import classes from '../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const [role, setRole] = useState('Студент');
+  const [role, setRole] = useState('');
 
   return (
       <nav>
