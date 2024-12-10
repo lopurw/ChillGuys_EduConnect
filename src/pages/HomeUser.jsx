@@ -23,17 +23,17 @@ const HomeUser = () => {
 						<img src="/public/vacancy.png" alt="" />
 						Вакансии
 					</button>
-          <NavLink to="/projectuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
-					<button className={classes.button}>
-						{' '}
-						<img src="/public/project.png" alt="" /> Проекты
-					</button>
-          </NavLink>
+					<NavLink to="/projectuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+						<button className={classes.button}>
+							{' '}
+							<img src="/public/project.png" alt="" /> Проекты
+						</button>
+					</NavLink>
 					<NavLink to="/mycourses" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
-					<button className={classes.button}>
-						{' '}
-						<img src="/public/courses.png" alt="" /> Мои курсы
-					</button>
+						<button className={classes.button}>
+							{' '}
+							<img src="/public/courses.png" alt="" /> Мои курсы
+						</button>
 					</NavLink>
 				</div>
 				<StatisticsChart></StatisticsChart>
