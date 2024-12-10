@@ -19,6 +19,7 @@ builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder => b
 
 builder.Services.AddScoped<Seeder>();
 builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddControllers();
 

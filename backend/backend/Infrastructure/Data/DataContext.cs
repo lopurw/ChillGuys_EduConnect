@@ -16,6 +16,7 @@ public class DataContext : DbContext
     public DbSet<Course> Courses { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
     public DbSet<Project> Projects { get; set; }
+    public DbSet<Comment> Comments { get; set; }
     
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

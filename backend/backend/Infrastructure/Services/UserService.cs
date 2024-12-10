@@ -326,3 +326,8 @@ public class LoginResponse
     public string UserId { get; set; }
     public string Role { get; set; } // Return user's role type
 }
+
+
+
+
+

@@ -94,13 +94,21 @@ public class Project
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public int CourseId { get; set; }
-    public string Status { get; set; } 
-    public DateTime Deadline { get; set; }
-
-    // Навигационные свойства
-    public Course Course { get; set; }
-    public ICollection<User> Students { get; set; }
+    public string? Category { get; set; }  
+    public List<string>? Tasks { get; set; } 
+    public string? AdditionalMaterials { get; set; } 
+    public List<Comment>? Comments { get; set; } 
+    public string? Image { get; set; }  
+    public ICollection<User>? Students { get; set; } 
+}
+public class Comment
+{
+    public int Id { get; set; }
+    public int ProjectId { get; set; }
+    
+    public Project Project { get; set; }
+    public string Author { get; set; }
+    public string Content { get; set; }
 }
 
 public class Portfolio
@@ -112,3 +120,5 @@ public class Portfolio
     public User Student { get; set; }
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
+
+

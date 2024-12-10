@@ -111,9 +111,6 @@ public class Seeder
             Id = 1,
             Title = "Math Research Project",
             Description = "Research advanced mathematical topics",
-            CourseId = 1,
-            Status = "Open",
-            Deadline = DateTime.UtcNow.AddMonths(1),
             Students = new List<User> { _context.Users.First(u => u.Role is StudentProfile) }
         });
     }

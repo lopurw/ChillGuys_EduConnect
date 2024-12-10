@@ -69,3 +69,15 @@ export const fetchCourseStats = async () => {
     const response = await apiClient.get(`Course/courseCompletionStats?studentId=${localStorage.getItem('userId')}`);
     return response.data;
 };
+
+export const getAllProjects = async () => {
+
+    const response = await apiClient.get('Project/getProjects');
+    return response.data;
+};
+
+export const getProjectById = async (id) => {
+
+    const response = await apiClient.get(`Project/getProjectById?id=${id}`);
+    return response.data;
+}
