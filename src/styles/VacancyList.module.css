@@ -1,0 +1,8 @@
+.main {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+.h3 {
+	text-align: center;
+}
