@@ -33,7 +33,7 @@ const Login = () => {
       const response = await login(formData); 
       setSuccess('Вход выполнен успешно!');
       console.log('Ответ сервера:', response);
-      localStorage.setItem('userRole', response.role);
+
     } catch (err) {
       setError('Ошибка входа. Проверьте введённые данные.');
       console.error('Ошибка:', err);
