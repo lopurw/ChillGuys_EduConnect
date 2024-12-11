@@ -1,0 +1,35 @@
+.container {
+	max-width: 1200px;
+	margin: 50px auto;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+	padding: 10px 20px;
+	/* background-color: #4caf50; */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 20px;
+}
+.button:hover {
+	padding: 10px 20px;
+	/* background-color: #4caf50; */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.h1 {
+	text-align: center;
+}

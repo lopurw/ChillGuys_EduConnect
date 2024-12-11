@@ -1,0 +1,99 @@
+@import url('Variables.css');
+
+.main {
+	display: flex;
+	align-items: center;
+	justify-self: center;
+	flex-direction: column;
+	padding: 20px;
+	gap: 40px;
+	border-radius: 30px;
+	margin: 50px 0 50px 0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	justify-content: center;
+}
+@media (max-width: 500px) {
+	.main {
+		display: flex;
+		align-items: center;
+		justify-self: center;
+		flex-direction: column;
+		padding: 0;
+		gap: 40px;
+		border-radius: 30px;
+		margin: 50px 0 50px 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	}
+}
+.buttons_container {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.button {
+	background: var(--green-color);
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 20px;
+	transition: all 0.2s ease-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.2s ease-out;
+	width: 186px;
+	gap: 10px;
+}
+
+.button:hover {
+	scale: 1.05;
+	transform: translateY(-5px);
+}
+.button img {
+	width: auto;
+	height: 50px;
+}
+.addButton {
+	border-radius: 50px;
+	width: 100px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 100px;
+	position: absolute;
+	bottom: 100px;
+	right: 100px;
+}
+.addButton:hover {
+	border-radius: 50px;
+	width: 100px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 100px;
+	position: absolute;
+	bottom: 100px;
+	right: 100px;
+}
+
+.addTaskButton {
+	border-radius: 50px;
+	width: 100px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 100px;
+	bottom: 100px;
+	right: 100px;
+}
+
+.addTaskButton_wrapper {
+	align-self: flex-end;
+}

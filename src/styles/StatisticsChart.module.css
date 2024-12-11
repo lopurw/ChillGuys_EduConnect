@@ -1,0 +1,23 @@
+@import url('Variables.css');
+
+.statistic_wrapper {
+	display: flex;
+	gap: 70px;
+	flex-wrap: wrap;
+}
+.statistic_inner_wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	justify-content: center;
+	text-align: center;
+	border-radius: 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	width: fit-content;
+	padding: 20px 50px;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+}

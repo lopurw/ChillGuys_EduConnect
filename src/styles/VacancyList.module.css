@@ -1,0 +1,22 @@
+@import url('Variables.css');
+
+.wrapper {
+	width: 100%;
+}
+
+.container {
+	padding: 0 80px 0 80px;
+}
+
+.vacancy_list_wrapper {
+	margin-top: 50px;
+}
+
+.main {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+.h3 {
+	text-align: center;
+}

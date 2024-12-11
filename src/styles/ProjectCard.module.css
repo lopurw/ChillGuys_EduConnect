@@ -1,0 +1,36 @@
+@import url('Variables.css');
+
+.project_card {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 30px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.project_card_img_block {
+    display: flex;
+}
+
+.project_card_img_block_text {
+    padding-left: 20px;
+}
+
+.project_card_img_block_text p {
+    margin-bottom: 0;
+}
+
+.project_duration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--light-grey);
+    border-right: 1px solid var(--light-grey);
+}
+
+.project_card_button_block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
