@@ -1,9 +1,6 @@
 const StudentView = ({ onSwitchRole, roomName }) => {
     const handleJoinRoom = () => {
-      if (!roomName) {
-        alert("Преподаватель ещё не создал комнату.");
-        return;
-      }
+      
       window.open(`https://meet.jit.si/${roomName}`, "_blank");
     };
   
