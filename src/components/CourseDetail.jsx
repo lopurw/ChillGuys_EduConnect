@@ -5,6 +5,7 @@ import { getCourseById, completeLesson } from '../services/ApiServ.js';
 import classes from '../styles/CoursesDetail.module.css';
 
 const CourseDetail = () => {
+
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [course, setCourse] = useState(null);
@@ -246,6 +247,7 @@ const CourseDetail = () => {
 			</div>
 		</div>
 	);
+
 };
 
 export default CourseDetail;

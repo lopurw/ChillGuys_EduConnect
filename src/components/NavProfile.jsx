@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import html2pdf from 'html2pdf.js';
 import MyCourses from './MyCourses';
 import classes from '../styles/NavProfile.module.css';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import {getUserById, updateUser} from '../services/ApiServ'; // Add updateUser here
 
 const NavProfile = () => {
@@ -95,16 +97,26 @@ const NavProfile = () => {
         }
     };
 
-    const downloadPortfolio = () => {
+    const downloadPortfolio = async () => {
         const element = document.getElementById('portfolio-content');
-        const opt = {
-            margin: 1,
-            filename: 'portfolio.pdf',
-            image: {type: 'jpeg', quality: 0.98},
-            html2canvas: {scale: 2},
-            jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'},
-        };
-        html2pdf().from(element).set(opt).save();
+        try {
+            const canvas = await html2canvas(element, {
+                scale: 2, // Увеличение разрешения
+                useCORS: true, // Разрешение на загрузку кросс-доменных ресурсов (например, изображений)
+                backgroundColor: '#ffffff', // Установить белый фон, если он не указан в CSS
+                ignoreElements: (element) => element.classList.contains('no-pdf') // Игнорировать элементы с определённым классом
+            });
+            const imgData = canvas.toDataURL('image/png');
+    
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Сохраняем пропорции
+    
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save('portfolio.pdf');
+        } catch (error) {
+            console.error('Ошибка при создании PDF:', error);
+        }
     };
 
     const renderTabContent = () => {
@@ -196,7 +208,8 @@ const NavProfile = () => {
                         <h3>Курсы:</h3>
                         <MyCourses/>
                         <div className={classes.portfolio_main_buttons}>
-                            <button onClick={downloadPortfolio} className={classes.downloadButton}>Скачать PDF</button>
+                        <button onClick={downloadPortfolio} className={classes.downloadButton}>Скачать PDF</button>
+
                             <button onClick={() => setIsEditable(!isEditable)} className={classes.mainContentButton}>
                                 {isEditable ? 'Сохранить изменения' : 'Редактировать'}
                             </button>
