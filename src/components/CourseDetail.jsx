@@ -130,45 +130,57 @@ const CourseDetail = () => {
                 <p>Видео не доступны.</p>
               )}
             </div>
-            <button>Просмотреть все видео</button>{" "}
-         
+
+            {videoLinks.length > 0 ? (
+
+
+                <button>Просмотреть все видео</button>
+                )
+             : (
+                    <></>
+            )}
           </div>
 
           <div className={classes.documentation_block}>
             <h3>Документация</h3>
-            <ul>
+            <div className={classes.documentation_block_items}>
               {documentationLinks.length > 0 ? (
-                documentationLinks.map((doc, index) => (
-                  <li key={index}>
-                    <a
-                      href={`${doc}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Документ {index + 1}
-                    </a>
-                  </li>
-                ))
+                  <div className={classes.documentation_block_item_wrapper}>
+                    {documentationLinks.map((doc, index) => (
+                        <div className={classes.documentation_block_item} key={index}>
+                          <img src={'/public/Document_icon.png'} alt={''} className="course-image" />
+                          <a href={`${doc}`} target="_blank" rel="noopener noreferrer">
+                            Документ {index + 1}
+                          </a>
+                        </div>
+                    ))}
+                  </div>
               ) : (
-                <p>Документация не доступна.</p>
+                  <p>Документация не доступна.</p>
               )}
-            </ul>
+            </div>
           </div>
 
           <ul className={classes.documentation_block}>
             <h3>Задания</h3>
-            {lessons.map((lesson) => (
-              <li key={lesson.id}>
-                {lesson.title}
-                {lesson.isCompleted ? (
-                  <span> (Завершен)</span>
-                ) : (
-                  <button onClick={() => handleCompleteLesson(lesson.id)}>
-                    Завершить
-                  </button>
-                )}
-              </li>
-            ))}
+            {lessons.length > 0 ? (
+                <div className={classes.documentation_block_item_wrapper}>
+                  {lessons.map((doc, index) => (
+                      <li key={lesson.id}>
+                        {lesson.title}
+                        {lesson.isCompleted ? (
+                            <span> (Завершен)</span>
+                        ) : (
+                            <button onClick={() => handleCompleteLesson(lesson.id)}>
+                              Завершить
+                            </button>
+                        )}
+                      </li>
+                  ))}
+                </div>
+            ) : (
+                <p>Задания не доступны.</p>
+            )}
           </ul>
 
           <button>Вступить</button>

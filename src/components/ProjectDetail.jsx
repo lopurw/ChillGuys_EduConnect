@@ -77,7 +77,11 @@ const ProjectDetail = () => {
 
 					<div className={classes.project_detail_tasks}>
 						<h3>Задания/ТЗ</h3>
-						<ul>{tasks && tasks.map((task, index) => <li key={index}>{task}</li>)}</ul>
+						{tasks != null ? (
+							<ul>{tasks.map((task, index) => <li key={index}>{task}</li>)}</ul>
+						) : (
+							<p>Нет доступного ТЗ</p>
+						)}
 					</div>
 
 					<div className={classes.additional_materials}>
@@ -95,7 +99,7 @@ const ProjectDetail = () => {
 									))}
 								</div>
 							) : (
-								<p className={classes.no_documents}>Документация не доступна.</p>
+								<p>Документация не доступна.</p>
 							)}
 						</div>
 					</div>
