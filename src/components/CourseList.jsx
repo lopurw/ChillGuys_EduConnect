@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import CourseCard from './CourseCard';
+
 import { Link } from 'react-router-dom';
 import { getAllCourses } from "../services/ApiServ.js";
 import classes from '../styles/CoursesList.module.css'; // Import CSS module
+
+import { Link } from 'react-router-dom'; 
+import CourseDetail from './CourseDetail';
+import classes from '../styles/CoursesList.module.css';
+import Video from './Video';
+
 
 const CourseList = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -109,6 +116,7 @@ const CourseList = () => {
             </div>
           </div>
         </div>
+        <Video></Video>
       </div>
   );
 };
