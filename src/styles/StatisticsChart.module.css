@@ -3,6 +3,7 @@
 .statistic_wrapper {
 	display: flex;
 	gap: 70px;
+	flex-wrap: wrap;
 }
 .statistic_inner_wrapper {
 	display: flex;
