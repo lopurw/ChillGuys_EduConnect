@@ -5,7 +5,6 @@ import classes from '../styles/NavProfile.module.css';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {getUserById, updateUser} from '../services/ApiServ'; // Add updateUser here
-
 const NavProfile = () => {
     const [selectedTab, setSelectedTab] = useState('personalInfo');
     const [isEditable, setIsEditable] = useState(false);
@@ -82,7 +81,7 @@ const NavProfile = () => {
     const handleSaveChanges = async () => {
         setLoading(true);
         try {
-            const response = await updateUser(userData); // Send the updated data
+            const response = await updateUser(userData);
             if (response?.statusCode === 200) {
                 console.log('Данные обновлены.');
             } else {
