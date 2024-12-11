@@ -5,12 +5,14 @@ import classes from '../styles/StatisticsChart.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const StatisticsChart = () => {
+const StatisticsChart = ({completed, notCompleted}) => {
+	completed = completed ? completed : 0;
+	notCompleted = notCompleted ? notCompleted : 0;
 	const data = {
 		labels: ['Completed', 'Remaining'],
 		datasets: [
 			{
-				data: [70, 30],
+				data: [completed *100, notCompleted *100],
 				backgroundColor: ['#36A2EB', '#FF6384'],
 				hoverBackgroundColor: ['#36A2EB', '#FF6384'],
 			},
@@ -39,7 +41,7 @@ const StatisticsChart = () => {
 			</div>
 			<div className={classes.statistic_inner_wrapper}>
 				<h3>Статистика участия в проектах</h3>
-				<h2>78</h2>
+				<h2>{completed + notCompleted}</h2>
 			</div>
 		</div>
 	);
