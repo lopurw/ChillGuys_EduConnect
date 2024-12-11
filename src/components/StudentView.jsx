@@ -1,3 +1,5 @@
+import classes from "../styles/TeacherView.module.css";
+
 const StudentView = ({ onSwitchRole, roomName }) => {
     const handleJoinRoom = () => {
 
@@ -9,10 +11,12 @@ const StudentView = ({ onSwitchRole, roomName }) => {
     };
   
     return (
-      <div>
+      <div className={classes.call_wrapper}>
         <h2>Student View</h2>
-        <button onClick={onSwitchRole}>Войти как преподаватель</button>
-        <button onClick={handleJoinRoom}>Хочу созвон</button>
+          <div className={classes.call_wrapper_buttons}>
+              <button onClick={onSwitchRole}>Войти как преподаватель</button>
+              <button onClick={handleJoinRoom}>Хочу созвон</button>
+          </div>
       </div>
     );
   };
