@@ -7,3 +7,5 @@ node_modules/*
 logs/
 npm-debug.log
 README.md
+/backend/backend/bin
+/backend/backend/obj
