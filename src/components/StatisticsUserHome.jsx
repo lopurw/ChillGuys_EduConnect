@@ -9,12 +9,12 @@ const StatisticsChart = ({completed, notCompleted}) => {
 	completed = completed ? completed : 0;
 	notCompleted = notCompleted ? notCompleted : 0;
 	const data = {
-		labels: ['Completed', 'Remaining'],
+		labels: ['Пройденные', 'В процессе'],
 		datasets: [
 			{
 				data: [completed *100, notCompleted *100],
-				backgroundColor: ['#36A2EB', '#FF6384'],
-				hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+				backgroundColor: ['#0fd306', '#FF6384'],
+				hoverBackgroundColor: ['#0fd306', '#FF6384'],
 			},
 		],
 	};
