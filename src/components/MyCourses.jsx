@@ -61,14 +61,11 @@ const MyCourses = () => {
 	}
 
 	return (
-<div className={classes.my_courses_wrapper}>
-
+		<div className={classes.my_courses_wrapper}>
 			{courses.map((course) => {
-				
 				console.log(`Rendering Course: ${course.title}, Score: ${course.score}, Total Lessons: ${course.totalLessons}, Progress: ${course.progress}`);
 				return <CourseCard key={course.id} course={course} onStartCourse={handleStartCourse} showProgress={true} />;
 			})}
-
 		</div>
 	);
 };
