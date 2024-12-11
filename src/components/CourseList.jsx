@@ -116,7 +116,6 @@ const CourseList = () => {
             </div>
           </div>
         </div>
-        <Video></Video>
       </div>
   );
 };

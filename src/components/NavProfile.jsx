@@ -6,7 +6,6 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {getUserById, updateUser} from '../services/ApiServ'; // Add updateUser here
 
-import { getUserById, updateUser } from '../services/ApiServ'; // Add updateUser here
 import ProjectList from './ProjectList';
 import CourseList from './CourseList';
 import Vacancies from './VacancyList';
