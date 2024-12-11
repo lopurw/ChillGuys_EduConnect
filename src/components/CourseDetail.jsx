@@ -5,6 +5,7 @@ import { getCourseById, completeLesson } from '../services/ApiServ.js';
 import classes from '../styles/CoursesDetail.module.css';
 
 const CourseDetail = () => {
+
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [course, setCourse] = useState(null);
@@ -101,6 +102,8 @@ const CourseDetail = () => {
 				alert('Student ID is missing.');
 				return;
 			}
+
+ 
 
 			const resourcesArray = newLesson.resources.split(',');
 
@@ -262,11 +265,13 @@ const CourseDetail = () => {
 						</form>
 					</div>
 
+
 					<button onClick={handleJoinCourse}>Вступить</button>
 				</div>
 			</div>
 		</div>
 	);
+
 };
 
 export default CourseDetail;

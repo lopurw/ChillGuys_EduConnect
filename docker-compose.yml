@@ -11,6 +11,17 @@ services:
       - .:/app
       - /app/node_modules
     command: npm run dev
+
+  postgres:
+    image: postgres
+    networks:
+      - minionetwork
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   backend:
     build:
       context: .
@@ -31,17 +42,6 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
-
-  postgres:
-    image: postgres
-    networks:
-      - minionetwork
-    environment:
-      - POSTGRES_PASSWORD=postgrespw
-    ports:
-      - 5432:5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 networks:
   minionetwork:
     driver: bridge
