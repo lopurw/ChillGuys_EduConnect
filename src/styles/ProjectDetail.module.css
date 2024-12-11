@@ -1,107 +1,116 @@
 @import url('Variables.css');
 
 .wrapper {
-    width: 100%;
+	width: 100%;
 }
 
 .container {
-    padding: 0 80px 0 80px;
+	padding: 0 80px 0 80px;
 }
 
 .project_detail {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 30px;
-    margin: 50px 0 50px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border-radius: 30px;
+	margin: 50px 0 50px 0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .project_detail_img_block {
-    display: flex;
+	display: flex;
 }
 
 .project_detail_img_block img {
-    width: 200px;
-    height: 200px;
+	width: 200px;
+	height: 200px;
 }
 
 .project_detail_img_block_text {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .project_detail_tasks {
-    padding: 20px;
-    border-radius: 30px;
-    margin-top: 50px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	padding: 20px;
+	border-radius: 30px;
+	margin-top: 50px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .additional_materials {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 30px;
-    margin-top: 50px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	border-radius: 30px;
+	margin-top: 50px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .additional_materials_block {
+	width: 100%;
+}
+
+.additional_materials_item_wrapper {
     list-style: none;
-    width: 100%;
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(10, 1fr);
+	width: 100%;
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(10, 1fr);
+}
+
+.additional_materials_block p {
+	width: 100%;
+	text-align: center;
 }
 
 .additional_materials_item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
 .additional_materials_item img {
-    max-width: 100%;
-    margin-bottom: 10px;
+	max-width: 100%;
+	margin-bottom: 10px;
 }
 
 .additional_materials_item a {
-    text-decoration: none;
-    color: #000;
-    font-size: 12px;
+	text-decoration: none;
+	color: #000;
+	font-size: 12px;
 }
 
 .project_detail_comments_block {
-    padding: 20px;
-    border-radius: 30px;
-    margin-top: 50px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	padding: 20px;
+	border-radius: 30px;
+	margin-top: 50px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .project_detail_add_comments {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 30px;
-    margin-top: 50px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border-radius: 30px;
+	margin-top: 50px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .project_detail_add_comments textarea {
-    width: 100%;
-    min-height: 100px;
-    margin-bottom: 20px;
+	width: 100%;
+	min-height: 100px;
+	margin-bottom: 20px;
 }
 
 .project_detail_comments {
-    padding: 20px;
-    border-radius: 30px;
-    margin-top: 50px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	padding: 20px;
+	border-radius: 30px;
+	margin-top: 50px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .backButton {
-    margin-top: 50px;
+	margin-top: 50px;
 }
