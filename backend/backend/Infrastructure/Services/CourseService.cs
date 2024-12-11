@@ -507,6 +507,8 @@ public class CreateCourseDto
     public string Description { get; set; }
     public string VideoUrl { get; set; }
     public string DocumentationUrl { get; set; }
+    
+    public IFormFile Image { get; set; }
     public int TeacherId { get; set; }
 }
 

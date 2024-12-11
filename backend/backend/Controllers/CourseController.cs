@@ -9,9 +9,12 @@ public class CourseController : ControllerBase
 {
     private readonly CourseService _courseService;
 
-    public CourseController(CourseService courseService)
+    private readonly VideoService _videoService;
+
+    public CourseController(CourseService courseService, VideoService videoService)
     {
         _courseService = courseService;
+        _videoService = videoService;
     }
 
     #region Course Methods
@@ -39,7 +42,7 @@ public class CourseController : ControllerBase
     }
 
     [HttpPost("addCourse")]
-    public async Task<IActionResult> AddCourse([FromBody] CreateCourseDto createCourseDto)
+    public async Task<IActionResult> AddCourse(CreateCourseDto createCourseDto)
     {
         var result = await _courseService.AddCourse(createCourseDto);
         return Ok(result);
@@ -86,7 +89,20 @@ public class CourseController : ControllerBase
         else
             return StatusCode((int)response.StatusCode, response); 
     }
-
+    
+    [HttpPost("createVideo")]
+    public async Task<IActionResult> CreateVideo([FromBody] CreateVideoDto createVideoDto)
+    {
+        var result = await _videoService.AddVideo(createVideoDto);
+        return Ok(result);
+    }
+    
+    [HttpGet("getVideos")]
+    public async Task<IActionResult> GetVideos(int courseId)
+    {
+        var result = await _videoService.GetVideo(courseId);
+        return Ok(result);
+    }
     #endregion
 
     #region Lesson Methods

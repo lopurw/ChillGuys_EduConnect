@@ -1,23 +1,39 @@
+import { useState } from 'react';
 import classes from "../styles/TeacherView.module.css";
 
 const StudentView = ({ onSwitchRole, roomName }) => {
-    const handleJoinRoom = () => {
+	const [showJoinButton, setShowJoinButton] = useState(false);
 
-      if (!roomName) {
-        alert("Преподаватель ещё не создал комнату.");
-        return;
-      }
-      window.open(`https://meet.jit.si/${roomName}`, "_blank");
-    };
-  
-    return (
-      <div className={classes.call_wrapper}>
-        <h2>Student View</h2>
-          <div className={classes.call_wrapper_buttons}>
+	const handleWantCall = () => {
+		setTimeout(() => {
+			setShowJoinButton(true);
+		}, 5000);
+	};
+
+	const handleJoinRoom = () => {
+		if (roomName) {
+			const roomUrl = `https://meet.jit.si/${roomName}`;
+			window.open(roomUrl, '_blank');
+		} else {
+			alert('Room name is not specified!');
+		}
+	};
+
+	return (
+		<div className={classes.call_wrapper}>
+			<h2>Student View</h2>
+<div className={classes.call_wrapper_buttons}>
               <button onClick={onSwitchRole}>Войти как преподаватель</button>
-              <button onClick={handleJoinRoom}>Хочу созвон</button>
+			<button onClick={handleWantCall}>Хочу созвон</button>
+			{showJoinButton && (
+				<a href={`https://meet.jit.si/${roomName}`} target="_blank" rel="noopener noreferrer">
+					Присоединиться к комнате
+				</a>
+			)}
           </div>
-      </div>
-    );
-  };
-  export default StudentView;
+			
+		</div>
+	);
+};
+
+export default StudentView;

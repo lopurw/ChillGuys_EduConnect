@@ -24,10 +24,38 @@ export const register = async (userData) => {
 };
 
 
+
+// Assuming `apiClient` is an instance of axios
 export const updateUser = async (userData) => {
-    const response = await apiClient.put('/User/updateUser', userData);
+    // Create a new FormData object
+    const formData = new FormData();
+
+    // Append all necessary fields to FormData
+    formData.append('Id', userData.id);
+    formData.append('Name', userData.name);
+    formData.append('Email', userData.email);
+
+    // Check if a profile image is provided
+    if (userData.profileImage) {
+        formData.append('ProfileImage', userData.profileImage); // Ensure file name is included
+    }
+
+    // Append other fields
+    formData.append('CreatedAt', userData.createdAt);
+    formData.append('UpdatedAt', userData.updatedAt);
+    formData.append('RoleName', userData.roleName);
+    formData.append('RoleDetails', JSON.stringify(userData.roleDetails)); // Convert role details to JSON string if it's an object
+
+    // Send the request
+    const response = await apiClient.post('/User/updateUser', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+
     return response.data;
 };
+
 
 export const login = async (userData) => {
     const response = await apiClient.post('/User/login', userData);
