@@ -1,4 +1,5 @@
 using EduConnect.Domain.Entities;
+using EduConnect.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduConnect.Infrastructure.Data;
@@ -8,6 +9,7 @@ public class DataContext : DbContext
     public DataContext(DbContextOptions<DataContext> options) : base(options) { }
  
     public DbSet<User> Users { get; set; }
+    public DbSet<Video> Videos { get; set; }
     public DbSet<UserRole> Roles { get; set; }
     public DbSet<ManagerProfile> ManagerProfiles { get; set; }
     public DbSet<TeacherProfile> TeacherProfiles { get; set; }

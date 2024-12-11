@@ -4,6 +4,8 @@ import MyCourses from './MyCourses';
 import classes from '../styles/NavProfile.module.css';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import {getUserById, updateUser} from '../services/ApiServ'; // Add updateUser here
+
 import { getUserById, updateUser } from '../services/ApiServ'; // Add updateUser here
 import ProjectList from './ProjectList';
 import CourseList from './CourseList';
@@ -81,24 +83,25 @@ const NavProfile = () => {
 		}
 	};
 
-	const handleSaveChanges = async () => {
-		setLoading(true);
-		try {
-			const response = await updateUser(userData); // Send the updated data
-			if (response?.statusCode === 200) {
-				console.log('Данные обновлены.');
-			} else {
-				alert('Ошибка при обновлении данных.');
-			}
-			setIsEditable(false);
-		} catch (error) {
-			alert('Произошла ошибка при сохранении данных.');
-			console.error('Update Error:', error);
-		} finally {
-			setLoading(false);
-		}
-	};
 
+
+    const handleSaveChanges = async () => {
+        setLoading(true);
+        try {
+            const response = await updateUser(userData);
+            if (response?.statusCode === 200) {
+                console.log('Данные обновлены.');
+            } else {
+                alert('Ошибка при обновлении данных.');
+            }
+            setIsEditable(false);
+        } catch (error) {
+            alert('Произошла ошибка при сохранении данных.');
+            console.error('Update Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 	const downloadPortfolio = async () => {
 		const element = document.getElementById('portfolio-content');
 		try {

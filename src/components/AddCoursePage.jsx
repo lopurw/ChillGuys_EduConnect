@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classes from "../styles/CoursesList.module.css";
 
 const AddCoursePage = () => {
 	// State to manage form input values
@@ -46,43 +47,50 @@ const AddCoursePage = () => {
 	};
 
 	return (
-		<div>
-			<h1>Добавить новый курс</h1>
-			<form onSubmit={handleSubmit}>
-				{/* Title */}
-				<label>
-					Название курса:
-					<input type="text" name="title" value={courseData.title} onChange={handleInputChange} />
-				</label>
-				<br />
 
-				{/* Description */}
-				<label>
-					Описание курса:
-					<textarea name="description" value={courseData.description} onChange={handleInputChange} />
-				</label>
-				<br />
+		<div className={classes.wrapper}>
+			<div className={classes.container}>
+				<div className={classes.course_add_wrapper}>
+					<div className={classes.course_add_card}>
+						<h1>Добавить новый курс</h1>
+						<form onSubmit={handleSubmit}>
+							{/* Title */}
+							<label>
+								Название курса:
+								<input type="text" name="title" value={courseData.title} onChange={handleInputChange} />
+							</label>
+							<br />
 
-				{/* Video URL */}
-				<label>
-					Ссылка на видео:
-					<input type="text" name="videoUrl" value={courseData.videoUrl} onChange={handleInputChange} />
-				</label>
-				<br />
+							{/* Description */}
+							<label>
+								Описание курса:
+								<textarea name="description" value={courseData.description} onChange={handleInputChange} />
+							</label>
+							<br />
 
-				{/* Documentation URL */}
-				<label>
-					Ссылка на документацию:
-					<input type="text" name="documentationUrl" value={courseData.documentationUrl} onChange={handleInputChange} />
-				</label>
-				<br />
+							{/* Video URL */}
+							<label>
+								Ссылка на видео:
+								<input type="text" name="videoUrl" value={courseData.videoUrl} onChange={handleInputChange} />
+							</label>
+							<br />
 
-				{/* Teacher ID (hidden or static) */}
-				<input type="hidden" name="teacherId" value={courseData.teacherId} />
+							{/* Documentation URL */}
+							<label>
+								Ссылка на документацию:
+								<input type="text" name="documentationUrl" value={courseData.documentationUrl} onChange={handleInputChange} />
+							</label>
+							<br />
 
-				{/* Submit Button */}
-				<button type="submit">Сохранить</button>
-			</form>
+							{/* Teacher ID (hidden or static) */}
+							<input type="hidden" name="teacherId" value={courseData.teacherId} />
+
+							{/* Submit Button */}
+							<button type="submit">Сохранить</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

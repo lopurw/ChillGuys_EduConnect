@@ -340,7 +340,12 @@ public class LoginResponse
     public string Role { get; set; } // Return user's role type
 }
 
-
-
+public class Video
+{
+    public int Id { get; set; }
+    public int CourseId { get; set; }
+    public Course Course { get; set; }
+    public string Url { get; set; }
+}
 
 

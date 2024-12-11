@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import classes from "../styles/TeacherView.module.css";
 
 const TeacherView = ({ onSwitchRole }) => {
   const [roomName, setRoomName] = useState("");
@@ -61,20 +62,22 @@ const TeacherView = ({ onSwitchRole }) => {
   };
 
   return (
-    <div>
+    <div className={classes.call_wrapper}>
       <h2>Teacher View</h2>
-      <button onClick={onSwitchRole}>Войти как ученик</button>
-      <button onClick={handleCreateRoom}>Создать комнату</button>
-      {roomName && (
-        <p>
-          Комната создана: <strong>{roomName}</strong>
-        </p>
-      )}
-      {!recording ? (
-        <button onClick={startRecording}>Начать запись</button>
-      ) : (
-        <button onClick={stopRecording}>Остановить запись</button>
-      )}
+      <div className={classes.call_wrapper_buttons}>
+        <button onClick={onSwitchRole}>Войти как ученик</button>
+        <button onClick={handleCreateRoom}>Создать комнату</button>
+        {roomName && (
+            <p>
+              Комната создана: <strong>{roomName}</strong>
+            </p>
+        )}
+        {!recording ? (
+            <button onClick={startRecording}>Начать запись</button>
+        ) : (
+            <button onClick={stopRecording}>Остановить запись</button>
+        )}
+      </div>
     </div>
   );
 };

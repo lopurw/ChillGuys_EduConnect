@@ -20,6 +20,7 @@ const CourseCard = ({ course, onStartCourse, showProgress }) => {
 			</div>
 		</Link>
 	);
+
 };
 
 export default CourseCard;

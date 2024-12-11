@@ -65,3 +65,25 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
 }
+
+.course_add_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.course_add_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.course_add_card button, .course_add_card input, .course_add_card textarea {
+    width: 100%;
+}

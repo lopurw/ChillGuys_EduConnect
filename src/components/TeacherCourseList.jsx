@@ -42,11 +42,11 @@ const TeacherCourseList = () => {
 	}
 
 	return (
-		<div className={classes.wrapper}>
+		<div>
 			<div className={classes.container}>
 				<div className={classes.course_list}>
 					{/* <h2>Мои курсы</h2> */}
-					<div className={classes.course_cards}>
+					<div style={{margin: '0'}} className={classes.course_cards}>
 						{courses.length > 0 ? (
 							courses.map((course) => (
 								<Link to={`/course/${course.id}`} key={course.id}>

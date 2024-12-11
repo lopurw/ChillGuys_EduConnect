@@ -18,6 +18,7 @@ import EditVacancy from '../components/EditVacancy';
 import VacancyList from '../components/VacancyList';
 import HomeTeacher from '../pages/HomeTeacher';
 import AddCoursePage from '../components/AddCoursePage';
+import AddTaskPage from '../components/AddTaskPage';
 import AddProject from '../components/AddProject';
 import MyCoursesPage from "../pages/MyCoursesPage.jsx";
 
@@ -51,6 +52,7 @@ const AppRoutes = () => {
 					<Route path="/vacancylist" element={<VacancyList />} />
 					<Route path="/hometeacher" element={<HomeTeacher />} />
 					<Route path="/addcourse" element={<AddCoursePage />} />
+					<Route path="/addtask" element={<AddTaskPage />} />
 					<Route path="/addproject" element={<AddProject />} />
 				</>
 			)}
