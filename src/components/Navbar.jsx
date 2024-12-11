@@ -31,6 +31,12 @@ const Navbar = () => {
 									EduConnect
 								</NavLink>
 							</div>
+						) : userRole === 'TeacherProfile' ? (
+							<div>
+								<NavLink to="/hometeacher" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+									EduConnect
+								</NavLink>
+							</div>
 						) : (
 							<div>
 								<NavLink to="/home" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>

@@ -16,16 +16,18 @@ import VacancyDetail from '../components/VacancyDetail';
 import AddVacancy from '../components/AddVacancy';
 import EditVacancy from '../components/EditVacancy';
 import VacancyList from '../components/VacancyList';
+import HomeTeacher from '../pages/HomeTeacher';
+import AddCoursePage from '../components/AddCoursePage'; // Import the AddCoursePage component
 
 const AppRoutes = () => {
-	const isAuthenticated = Boolean(localStorage.getItem('token')); // Проверяем наличие токена
+	const isAuthenticated = Boolean(localStorage.getItem('token')); // Check for authentication
 
 	return (
 		<Routes>
 			<Route path="/" element={<Dashboard />} />
 			<Route path="/home" element={<Home />} />
 
-			{/* Условный рендеринг для авторизации */}
+			{/* Conditional rendering based on authentication */}
 			{!isAuthenticated ? (
 				<>
 					<Route path="/login" element={<Login />} />
@@ -46,12 +48,12 @@ const AppRoutes = () => {
 					<Route path="/vacancy/:id" element={<VacancyDetail />} />
 					<Route path="/addvacancy" element={<AddVacancy />} />
 					<Route path="/vacancylist" element={<VacancyList />} />
-				
-					
+					<Route path="/hometeacher" element={<HomeTeacher />} />
+					{/* Add route for adding a course */}
+					<Route path="/addcourse" element={<AddCoursePage />} /> {/* This is the new route */}
 				</>
 			)}
 
-			
 			<Route path="*" element={<Navigate to="/" replace />} />
 		</Routes>
 	);
