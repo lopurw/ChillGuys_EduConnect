@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CourseCard from './CourseCard';
 import { getAllStudentCourses } from '../services/ApiServ.js'; // Assuming this service is already set up
-import classes from '../styles/MyCourses.module.css'; // Assuming you're using CSS Modules
+import classes from '../styles/MyCourses.module.css';
 
 const MyCourses = () => {
 	const [courses, setCourses] = useState([]);

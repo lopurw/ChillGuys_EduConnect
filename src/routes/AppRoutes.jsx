@@ -19,6 +19,7 @@ import VacancyList from '../components/VacancyList';
 import HomeTeacher from '../pages/HomeTeacher';
 import AddCoursePage from '../components/AddCoursePage';
 import AddProject from '../components/AddProject';
+import MyCoursesPage from "../pages/MyCoursesPage.jsx";
 
 const AppRoutes = () => {
 	const isAuthenticated = Boolean(localStorage.getItem('token'));
@@ -41,7 +42,7 @@ const AppRoutes = () => {
 					<Route path="/projectuser" element={<ProjectList />} />
 					<Route path="/project/:id" element={<ProjectDetail />} />
 					<Route path="/comment" element={<Comment />} />
-					<Route path="/mycourses" element={<MyCourses />} />
+					<Route path="/mycourses" element={<MyCoursesPage />} />
 					<Route path="/myprofile" element={<NavProfile />} />
 					<Route path="/homeemployer" element={<HomeEmployer />} />
 					<Route path="/vacancy/edit/:id" element={<EditVacancy />} />
