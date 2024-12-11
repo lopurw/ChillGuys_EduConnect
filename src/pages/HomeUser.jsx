@@ -59,12 +59,12 @@ const HomeUser = () => {
 					<p>Загрузка статистики...</p>
 				) : (
 					<div className={classes.stats}>
-						<p>
+						{/* <p>
 							Завершенные курсы: <strong>{courseStats.completedCourses}</strong>
 						</p>
 						<p>
 							Незавершенные курсы: <strong>{courseStats.notCompletedCourses}</strong>
-						</p>
+						</p> */}
 					</div>
 				)}
 			</div>
