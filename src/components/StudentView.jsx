@@ -1,5 +1,6 @@
 const StudentView = ({ onSwitchRole, roomName }) => {
     const handleJoinRoom = () => {
+
       if (!roomName) {
         alert("Преподаватель ещё не создал комнату.");
         return;

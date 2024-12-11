@@ -2,10 +2,10 @@
 import { Link } from 'react-router-dom';
 import classes from '../styles/CoursesCard.module.css';
 
+import { Link } from "react-router-dom";
+import classes from "../styles/CoursesCard.module.css";
 const CourseCard = ({ course, onStartCourse, showProgress }) => {
-	// Преобразуем прогресс в диапазон от 0 до 1
-	const progressValue = course.progress >= 0 ? Math.min(course.progress, 1) : 0;
-
+  
 	return (
     <Link to={`/course/${course.id}`} key={course.id}>
 		<div className={classes.course_card}>

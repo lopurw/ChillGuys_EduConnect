@@ -3,10 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png';
 import { getCourseById, completeLesson } from '../services/ApiServ.js';
 import classes from '../styles/CoursesDetail.module.css';
+import TeacherView from './TeacherView.jsx';
+import StudentView from './StudentView.jsx';
 
 const CourseDetail = () => {
 
 	const { id } = useParams();
+  const userRole = localStorage.getItem('userRole');
 	const navigate = useNavigate();
 	const [course, setCourse] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -102,6 +105,8 @@ const CourseDetail = () => {
 				alert('Student ID is missing.');
 				return;
 			}
+
+ 
 
 			const resourcesArray = newLesson.resources.split(',');
 
@@ -242,7 +247,26 @@ const CourseDetail = () => {
 						</form>
 					</div>
 
+
 					<button onClick={handleJoinCourse}>Вступить</button>
+
+
+
+          {userRole === 'StudentProfile' ? (
+							<div>
+								<StudentView></StudentView>
+							</div>
+						
+							
+						) : userRole === 'TeacherProfile' ? (
+							<div>
+								<TeacherView></TeacherView>
+							</div>
+						) : (
+							<div>
+								
+							</div>
+						)}
 				</div>
 			</div>
 		</div>
