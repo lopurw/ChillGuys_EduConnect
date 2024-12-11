@@ -11,10 +11,10 @@
 .course_detail_header {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 100%;
+    width: 80%;
     padding: 50px;
     border-radius: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
 }
 
 .course_detail {

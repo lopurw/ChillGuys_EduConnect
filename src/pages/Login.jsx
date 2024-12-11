@@ -18,20 +18,29 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setError('');
+	
 		try {
 			const response = await login(formData);
 			setSuccess('Вход выполнен успешно!');
 			console.log('Ответ сервера:', response);
+	
 			localStorage.setItem('userName', formData.userName);
 			localStorage.setItem('userRole', response.data.role);
 			localStorage.setItem('userId', response.data.userId);
 			localStorage.setItem('token', response.data.token);
-			window.location.href = '/homeuser';
+	
+		
+			if (response.data.role === 'ManagerProfile') {
+				window.location.href = '/homeemployer';
+			} else {
+				window.location.href = '/homeuser'; 
+			}
 		} catch (err) {
 			setError('Ошибка входа. Проверьте введённые данные.');
 			console.error('Ошибка:', err);
 		}
 	};
+	
 
 	return (
 		<div className={classes.main}>
