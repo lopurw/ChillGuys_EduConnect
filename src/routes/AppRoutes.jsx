@@ -15,6 +15,7 @@ import HomeEmployer from '../pages/HomeEmployer';
 import VacancyDetail from '../components/VacancyDetail';
 import AddVacancy from '../components/AddVacancy';
 import EditVacancy from '../components/EditVacancy';
+import VacancyList from '../components/VacancyList';
 
 const AppRoutes = () => {
 	const isAuthenticated = Boolean(localStorage.getItem('token')); // Проверяем наличие токена
@@ -44,6 +45,7 @@ const AppRoutes = () => {
 					<Route path="/vacancy/edit/:id" element={<EditVacancy />} />
 					<Route path="/vacancy/:id" element={<VacancyDetail />} />
 					<Route path="/addvacancy" element={<AddVacancy />} />
+					<Route path="/vacancylist" element={<VacancyList />} />
 				
 					
 				</>

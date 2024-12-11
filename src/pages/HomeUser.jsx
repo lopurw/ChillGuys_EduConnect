@@ -34,7 +34,7 @@ const HomeUser = () => {
 						<img src="/public/search.png" alt="" /> Поиск курсов
 					</button>
 				</NavLink>
-				<NavLink to="/coursesuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+				<NavLink to="/vacancylist" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
 					<button className={classes.button}>
 						<img src="/public/vacancy.png" alt="" />
 						Вакансии
