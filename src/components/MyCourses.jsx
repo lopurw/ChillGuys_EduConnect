@@ -61,9 +61,10 @@ const MyCourses = () => {
 	}
 
 	return (
+<div className={classes.my_courses_wrapper}>
 
 			{courses.map((course) => {
-				// Log the score, totalLessons, and progress for each course while rendering
+				
 				console.log(`Rendering Course: ${course.title}, Score: ${course.score}, Total Lessons: ${course.totalLessons}, Progress: ${course.progress}`);
 				return <CourseCard key={course.id} course={course} onStartCourse={handleStartCourse} showProgress={true} />;
 			})}

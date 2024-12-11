@@ -3,10 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png';
 import { getCourseById, completeLesson } from '../services/ApiServ.js';
 import classes from '../styles/CoursesDetail.module.css';
+import TeacherView from './TeacherView.jsx';
+import StudentView from './StudentView.jsx';
 
 const CourseDetail = () => {
 
 	const { id } = useParams();
+  const userRole = localStorage.getItem('userRole');
 	const navigate = useNavigate();
 	const [course, setCourse] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -179,71 +182,50 @@ const CourseDetail = () => {
 					</div>
 
 					<div className={classes.video_block}>
-            <h3>Видео с курса</h3>
-            <div className={classes.video_list}>
-              {videoLinks.length > 0 ? (
-                videoLinks.map((video, index) => (
-                  <video key={index} controls width="600">
-                    <source src={`${video}`} type="video/mp4" />
-                    Ваш браузер не поддерживает видео.
-                  </video>
-                ))
-              ) : (
-                <p>Видео не доступны.</p>
-              )}
-            </div>
-
-            {videoLinks.length > 0 ? (
-
-
-                <button>Просмотреть все видео</button>
-                )
-             : (
-                    <></>
-            )}
-          </div>
+						<h3>Видео с курса</h3>
+						<div className={classes.video_list}>
+							{videoLinks.length > 0 ? (
+								videoLinks.map((video, index) => (
+									<video key={index} controls width="600">
+										<source src={`${video}`} type="video/mp4" />
+										Ваш браузер не поддерживает видео.
+									</video>
+								))
+							) : (
+								<p>Видео не доступны.</p>
+							)}
+						</div>
+						<button>Просмотреть все видео</button>
+					</div>
 
 					<div className={classes.documentation_block}>
-            <h3>Документация</h3>
-            <div className={classes.documentation_block_items}>
-              {documentationLinks.length > 0 ? (
-                  <div className={classes.documentation_block_item_wrapper}>
-                    {documentationLinks.map((doc, index) => (
-                        <div className={classes.documentation_block_item} key={index}>
-                          <img src={'/public/Document_icon.png'} alt={''} className="course-image" />
-                          <a href={`${doc}`} target="_blank" rel="noopener noreferrer">
-                            Документ {index + 1}
-                          </a>
-                        </div>
-                    ))}
-                  </div>
-              ) : (
-                  <p>Документация не доступна.</p>
-              )}
-            </div>
-          </div>
+						<h3>Документация</h3>
+						<ul>
+							{documentationLinks.length > 0 ? (
+								documentationLinks.map((doc, index) => (
+									<li key={index}>
+										<a href={`${doc}`} target="_blank" rel="noopener noreferrer">
+											Документ {index + 1}
+										</a>
+									</li>
+								))
+							) : (
+								<p>Документация не доступна.</p>
+							)}
+						</ul>
+					</div>
 
-					<ul className={classes.documentation_block}>
-            <h3>Задания</h3>
-            {lessons.length > 0 ? (
-                <div className={classes.documentation_block_item_wrapper}>
-                  {lessons.map((doc, index) => (
-                      <li key={lesson.id}>
-                        {lesson.title}
-                        {lesson.isCompleted ? (
-                            <span> (Завершен)</span>
-                        ) : (
-                            <button onClick={() => handleCompleteLesson(lesson.id)}>
-                              Завершить
-                            </button>
-                        )}
-                      </li>
-                  ))}
-                </div>
-            ) : (
-                <p>Задания не доступны.</p>
-            )}
-          </ul>
+					<div className={classes.lesson_block}>
+						<h3>Задания</h3>
+						<ul>
+							{lessons.map((lesson) => (
+								<li key={lesson.id}>
+									{lesson.title}
+									{lesson.isCompleted ? <span> (Завершен)</span> : <button onClick={() => handleCompleteLesson(lesson.id)}>Завершить</button>}
+								</li>
+							))}
+						</ul>
+					</div>
 
 					{/* Add Lesson Form */}
 					<div className={classes.add_lesson_form}>
@@ -267,6 +249,24 @@ const CourseDetail = () => {
 
 
 					<button onClick={handleJoinCourse}>Вступить</button>
+
+
+
+          {userRole === 'StudentProfile' ? (
+							<div>
+								<StudentView></StudentView>
+							</div>
+						
+							
+						) : userRole === 'TeacherProfile' ? (
+							<div>
+								<TeacherView></TeacherView>
+							</div>
+						) : (
+							<div>
+								
+							</div>
+						)}
 				</div>
 			</div>
 		</div>
