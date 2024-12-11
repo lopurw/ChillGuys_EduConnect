@@ -23,6 +23,12 @@ export const register = async (userData) => {
     return response.data;
 };
 
+
+export const updateUser = async (userData) => {
+    const response = await apiClient.put('/User/updateUser', userData);
+    return response.data;
+};
+
 export const login = async (userData) => {
     const response = await apiClient.post('/User/login', userData);
     return response.data;
@@ -81,3 +87,8 @@ export const getProjectById = async (id) => {
     const response = await apiClient.get(`Project/getProjectById?id=${id}`);
     return response.data;
 }
+
+export const getUserById = async (id) => {
+    const response = await apiClient.get(`/User/getUserById?id=${id}`);
+    return response.data;
+};
