@@ -11,6 +11,10 @@ import ProjectDetail from '../components/ProjectDetail';
 import Comment from '../components/Comment';
 import MyCourses from '../components/MyCourses';
 import NavProfile from '../components/NavProfile';
+import HomeEmployer from '../pages/HomeEmployer';
+import VacancyDetail from '../components/VacancyDetail';
+import AddVacancy from '../components/AddVacancy';
+import EditVacancy from '../components/EditVacancy';
 
 const AppRoutes = () => {
 	const isAuthenticated = Boolean(localStorage.getItem('token')); // Проверяем наличие токена
@@ -36,10 +40,16 @@ const AppRoutes = () => {
 					<Route path="/comment" element={<Comment />} />
 					<Route path="/mycourses" element={<MyCourses />} />
 					<Route path="/myprofile" element={<NavProfile />} />
+					<Route path="/homeemployer" element={<HomeEmployer />} />
+					<Route path="/vacancy/edit/:id" element={<EditVacancy />} />
+					<Route path="/vacancy/:id" element={<VacancyDetail />} />
+					<Route path="/addvacancy" element={<AddVacancy />} />
+				
+					
 				</>
 			)}
 
-			{/* Редирект на главную для несуществующих маршрутов */}
+			
 			<Route path="*" element={<Navigate to="/" replace />} />
 		</Routes>
 	);
