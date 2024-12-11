@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import UsersListOnVacancy from '../components/UsersListOnVacancy';
+import ProjectList from '../components/ProjectList'; // Import the ProjectList component
 import classes from '../styles/VacancyDetail.module.css';
 
 const VacancyDetail = () => {
@@ -43,6 +44,12 @@ const VacancyDetail = () => {
 				<button className={classes.button}>Изменить</button>
 			</Link>
 			<UsersListOnVacancy users={applicants} />
+			{/* Add the "Add Project" button */}
+			<Link to="/addproject" className={classes.link}>
+				<button className={classes.button}>Добавить проект</button>
+			</Link>
+			{/* <h2>Проекты для этой вакансии</h2> */}
+			<ProjectList />
 		</div>
 	);
 };

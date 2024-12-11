@@ -17,17 +17,17 @@ import AddVacancy from '../components/AddVacancy';
 import EditVacancy from '../components/EditVacancy';
 import VacancyList from '../components/VacancyList';
 import HomeTeacher from '../pages/HomeTeacher';
-import AddCoursePage from '../components/AddCoursePage'; // Import the AddCoursePage component
+import AddCoursePage from '../components/AddCoursePage';
+import AddProject from '../components/AddProject';
 
 const AppRoutes = () => {
-	const isAuthenticated = Boolean(localStorage.getItem('token')); // Check for authentication
+	const isAuthenticated = Boolean(localStorage.getItem('token'));
 
 	return (
 		<Routes>
 			<Route path="/" element={<Dashboard />} />
 			<Route path="/home" element={<Home />} />
 
-			{/* Conditional rendering based on authentication */}
 			{!isAuthenticated ? (
 				<>
 					<Route path="/login" element={<Login />} />
@@ -49,8 +49,8 @@ const AppRoutes = () => {
 					<Route path="/addvacancy" element={<AddVacancy />} />
 					<Route path="/vacancylist" element={<VacancyList />} />
 					<Route path="/hometeacher" element={<HomeTeacher />} />
-					{/* Add route for adding a course */}
-					<Route path="/addcourse" element={<AddCoursePage />} /> {/* This is the new route */}
+					<Route path="/addcourse" element={<AddCoursePage />} />
+					<Route path="/addproject" element={<AddProject />} />
 				</>
 			)}
 
