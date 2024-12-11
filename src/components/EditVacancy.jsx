@@ -6,7 +6,7 @@ const EditVacancy = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	// Placeholder vacancy data
+
 	const [vacancy, setVacancy] = useState({
 		title: 'Frontend Developer',
 		description: 'Develop and maintain user interfaces.',
@@ -21,7 +21,7 @@ const EditVacancy = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Simulate a successful update
+		
 		alert('Vacancy updated successfully! Returning to vacancy details.');
 		navigate(`/vacancy/${id}`);
 	};
