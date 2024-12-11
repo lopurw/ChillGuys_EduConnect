@@ -130,21 +130,23 @@ const NavProfile = () => {
                             <div className={classes.main_info_block_text_info_block}>
                                 <h3>Личная информация</h3>
                                 <div className={classes.main_info_block_text_info}>
-                                    {Object.keys(outData).map((key) => (
-                                        <div key={key}>
-                                            <strong>{fieldLabels[key] || key}:</strong>{' '}
-                                            {isEditable && key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' ? (
-                                                <input
-                                                    type="text"
-                                                    name={key}
-                                                    value={outData[key] || ''}
-                                                    onChange={handleInputChange}
-                                                />
-                                            ) : (
-                                                outData[key]
-                                            )}
-                                        </div>
-                                    ))}
+                                    {Object.keys(userData).map((key) =>
+                                        key !== 'id' && key !== 'profileImage' ? (
+                                            <div key={key}>
+                                                <strong>{fieldLabels[key] || key}:</strong>{' '}
+                                                {isEditable && key !== 'createdAt' && key !== 'updatedAt' ? (
+                                                    <input
+                                                        type="text"
+                                                        name={key}
+                                                        value={userData[key] || ''}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                ) : (
+                                                    userData[key]
+                                                )}
+                                            </div>
+                                        ) : null // Не рендерить ничего для id и profileImage
+                                    )}
                                 </div>
                                 <button
                                     onClick={() => {
@@ -175,7 +177,6 @@ const NavProfile = () => {
                             <div className={classes.portfolio_main_info_block}>
                                 <p>Имя: {userData.name} {userData.lastName} {userData.middleName}</p>
                                 <p>Стек технологий: HTML/CSS</p>
-                                <p>Уровень английского: B2</p>
                             </div>
 
                             <div className={classes.portfolio_main_info_block}>
