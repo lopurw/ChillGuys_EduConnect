@@ -5,6 +5,7 @@ import { getCourseById, completeLesson } from '../services/ApiServ.js';
 import classes from '../styles/CoursesDetail.module.css';
 import TeacherView from './TeacherView.jsx';
 import StudentView from './StudentView.jsx';
+import AddTask from '../components/AddTask';
 
 const CourseDetail = () => {
 
@@ -215,42 +216,18 @@ const CourseDetail = () => {
 						</ul>
 					</div>
 
-					<div className={classes.lesson_block}>
+					<div className={classes.lesson_wrapper}>
 						<h3>Задания</h3>
-						<ul>
+						<div className={classes.lesson_block}>
 							{lessons.map((lesson) => (
 								<li key={lesson.id}>
 									{lesson.title}
 									{lesson.isCompleted ? <span> (Завершен)</span> : <button onClick={() => handleCompleteLesson(lesson.id)}>Завершить</button>}
 								</li>
 							))}
-						</ul>
+						</div>
+						<AddTask />
 					</div>
-
-					{/* Add Lesson Form */}
-					<div className={classes.add_lesson_form}>
-						<h3>Добавить задание</h3>
-						<form onSubmit={handleAddLesson}>
-							<div>
-								<label>Название задания</label>
-								<input type="text" value={newLesson.title} onChange={(e) => setNewLesson({ ...newLesson, title: e.target.value })} required />
-							</div>
-							<div>
-								<label>Содержание задания</label>
-								<textarea value={newLesson.content} onChange={(e) => setNewLesson({ ...newLesson, content: e.target.value })} required />
-							</div>
-							<div>
-								<label>Ресурсы (через запятую)</label>
-								<input type="text" value={newLesson.resources} onChange={(e) => setNewLesson({ ...newLesson, resources: e.target.value })} />
-							</div>
-							<button type="submit">Добавить задание</button>
-						</form>
-					</div>
-
-
-					<button onClick={handleJoinCourse}>Вступить</button>
-
-
 
           {userRole === 'StudentProfile' ? (
 							<div>
@@ -267,6 +244,8 @@ const CourseDetail = () => {
 								
 							</div>
 						)}
+
+					<button onClick={handleJoinCourse}>Вступить</button>
 				</div>
 			</div>
 		</div>

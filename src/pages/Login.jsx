@@ -32,8 +32,10 @@ const Login = () => {
 		
 			if (response.data.role === 'ManagerProfile') {
 				window.location.href = '/homeemployer';
+			}  else if (response.data.role === 'TeacherProfile') {
+				window.location.href = '/hometeacher';
 			} else {
-				window.location.href = '/homeuser'; 
+				window.location.href = '/homeuser';
 			}
 		} catch (err) {
 			setError('Ошибка входа. Проверьте введённые данные.');
