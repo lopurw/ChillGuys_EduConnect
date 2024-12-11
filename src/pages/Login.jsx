@@ -1,22 +1,10 @@
 import classes from '../styles/Login.module.css';
 import React, { useState } from 'react';
-import axios from 'axios';
-
-const apiClient = axios.create({
-	baseURL: 'http://localhost:2211/api',
-	headers: {
-		'Content-Type': 'application/json',
-	},
-});
-
-const login = async (userData) => {
-	const response = await apiClient.post('/Auth/Login', userData);
-	return response.data;
-};
+import { login } from '../services/ApiServ';
 
 const Login = () => {
 	const [formData, setFormData] = useState({
-		email: '',
+		userName: '',
 		password: '',
 	});
 	const [error, setError] = useState('');
@@ -34,7 +22,11 @@ const Login = () => {
 			const response = await login(formData);
 			setSuccess('Вход выполнен успешно!');
 			console.log('Ответ сервера:', response);
-			localStorage.setItem('userRole', response.role);
+			localStorage.setItem('userName', formData.userName);
+			localStorage.setItem('userRole', response.data.role);
+			localStorage.setItem('userId', response.data.userId);
+			localStorage.setItem('token', response.data.token);
+			window.location.href = '/homeuser';
 		} catch (err) {
 			setError('Ошибка входа. Проверьте введённые данные.');
 			console.error('Ошибка:', err);
@@ -53,7 +45,7 @@ const Login = () => {
 					<div className={classes.form_container}>
 						<label>
 							Электронная почта
-							<input type="email" name="email" value={formData.email} onChange={handleChange} required />
+							<input type="userName" name="userName" value={formData.userName} onChange={handleChange} required />
 						</label>
 					</div>
 

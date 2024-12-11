@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { register } from '../services/ApiServ';
 import classes from '../styles/Register.module.css';
+import { register } from '../services/ApiServ';
 
 const Register = () => {
-	const [role, setRole] = useState('user');
+	const [roleType, setRoleType] = useState('student');
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
-		roleSpecificField: '',
-		additionalInfo: '',
+		profileImage: '',
+		department: '',
+		position: '',
+		specialization: '',
+		degree: '',
+		enrollmentNumber: '',
+		enrollmentDate: '',
+		major: '',
 	});
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
@@ -21,8 +27,18 @@ const Register = () => {
 	};
 
 	const handleRoleChange = (e) => {
-		setRole(e.target.value);
-		setFormData((prev) => ({ ...prev, roleSpecificField: '', additionalInfo: '' }));
+		setRoleType(e.target.value);
+		// Очистка данных, специфичных для роли
+		setFormData((prev) => ({
+			...prev,
+			department: '',
+			position: '',
+			specialization: '',
+			degree: '',
+			enrollmentNumber: '',
+			enrollmentDate: '',
+			major: '',
+		}));
 	};
 
 	const handleSubmit = async (e) => {
@@ -35,15 +51,37 @@ const Register = () => {
 
 		setError('');
 		try {
+			let roleData;
+			if (roleType === 'manager') {
+				roleData = {
+					Department: formData.department,
+					Position: formData.position,
+				};
+			} else if (roleType === 'teacher') {
+				roleData = {
+					Specialization: formData.specialization,
+					Degree: formData.degree,
+				};
+			} else if (roleType === 'student') {
+				const now = new Date();
+				roleData = {
+					EnrollmentNumber: formData.enrollmentNumber,
+					EnrollmentDate: new Date(now.getTime() + now.getTimezoneOffset() * 60 * 1000),
+					Major: formData.major,
+				};
+			}
+
 			const userData = {
-				name: formData.name,
 				email: formData.email,
 				password: formData.password,
-				role,
-				roleSpecificField: formData.roleSpecificField,
-				additionalInfo: formData.additionalInfo,
+				name: formData.name,
+				profileImage: formData.profileImage,
+				roleType,
+				roleData,
 			};
+
 			const response = await register(userData);
+
 			setSuccess('Регистрация прошла успешно!');
 			console.log('Ответ сервера:', response);
 		} catch (err) {
@@ -91,49 +129,81 @@ const Register = () => {
 
 					<div className={classes.form_container}>
 						<label>
+							Изображение профиля (URL)
+							<input type="text" name="profileImage" value={formData.profileImage} onChange={handleChange} placeholder="Введите URL изображения" />
+						</label>
+					</div>
+
+					<div className={classes.form_container}>
+						<label>
 							Роль
-							<select name="role" value={role} onChange={handleRoleChange} required>
-								<option value="user">Пользователь</option>
+							<select name="roleType" value={roleType} onChange={handleRoleChange} required>
+								<option value="student">Студент</option>
 								<option value="teacher">Преподаватель</option>
-								<option value="employer">Работодатель</option>
+								<option value="manager">Менеджер</option>
 							</select>
 						</label>
 					</div>
 
-					{role === 'teacher' && (
-						<div className={classes.form_container}>
-							<label>
-								Специализация
-								<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Например, Математика, Физика" required />
-							</label>
-						</div>
+					{/* Role-specific fields */}
+					{roleType === 'manager' && (
+						<>
+							<div className={classes.form_container}>
+								<label>
+									Департамент
+									<input type="text" name="department" value={formData.department} onChange={handleChange} required />
+								</label>
+							</div>
+							<div className={classes.form_container}>
+								<label>
+									Позиция
+									<input type="text" name="position" value={formData.position} onChange={handleChange} required />
+								</label>
+							</div>
+						</>
 					)}
 
-					{role === 'employer' && (
-						<div className={classes.form_container}>
-							<label>
-								Название компании
-								<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Введите название компании" required />
-							</label>
-						</div>
+					{roleType === 'teacher' && (
+						<>
+							<div className={classes.form_container}>
+								<label>
+									Специализация
+									<input type="text" name="specialization" value={formData.specialization} onChange={handleChange} required />
+								</label>
+							</div>
+							<div className={classes.form_container}>
+								<label>
+									Степень
+									<input type="text" name="degree" value={formData.degree} onChange={handleChange} required />
+								</label>
+							</div>
+						</>
 					)}
 
-					{role === 'user' && (
-						<div className={classes.form_container}>
-							<label>
-								Хобби или интересы
-								<input type="text" name="roleSpecificField" value={formData.roleSpecificField} onChange={handleChange} placeholder="Например, чтение, походы" />
-							</label>
-						</div>
+					{roleType === 'student' && (
+						<>
+							<div className={classes.form_container}>
+								<label>
+									Номер зачисления
+									<input type="number" name="enrollmentNumber" value={formData.enrollmentNumber} onChange={handleChange} required />
+								</label>
+							</div>
+							<div className={classes.form_container}>
+								<label>
+									Дата зачисления
+									<input type="date" name="enrollmentDate" value={formData.enrollmentDate} onChange={handleChange} required />
+								</label>
+							</div>
+							<div className={classes.form_container}>
+								<label>
+									Специальность
+									<input type="text" name="major" value={formData.major} onChange={handleChange} required />
+								</label>
+							</div>
+						</>
 					)}
-
-					<div className={classes.form_container}>
-						<label>
-							Доп. информация
-							<textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} placeholder="Расскажите о себе" />
-						</label>
-					</div>
 				</div>
+
 				<button type="submit" className={classes.button}>
 					Зарегистрироваться
 				</button>
