@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { getAllCourses } from "../services/ApiServ.js";
 import classes from '../styles/CoursesList.module.css'; // Import CSS module
 
-import { Link } from 'react-router-dom'; 
+
 import CourseDetail from './CourseDetail';
-import classes from '../styles/CoursesList.module.css';
+
 import Video from './Video';
 
 
@@ -28,13 +28,13 @@ const CourseList = () => {
             id: course.id,
             title: course.title || 'Без названия',
             description: course.description || 'Описание отсутствует',
-            duration: '10 часов', // Replace with actual duration from API
-            category: 'Programming', // Replace with actual category from API
+            duration: '10 часов', 
+            category: 'Programming', 
             instructor: course.teacherName || 'Преподаватель неизвестен',
-            instructorImage: '/images/default-teacher.jpg', // Replace with actual instructor image if available
+            instructorImage: '/images/default-teacher.jpg', 
             videos: course.videoUrl ? [course.videoUrl] : [],
             documentation: course.documentationUrl ? [course.documentationUrl] : [],
-            image: 'https://via.placeholder.com/150', // Replace with actual image if available
+            image: course.description, 
           }));
           setCourses(formattedCourses);
           setFilteredCourses(formattedCourses);

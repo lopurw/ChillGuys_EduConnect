@@ -11,26 +11,33 @@ const Navbar = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('userRole');
 		window.location.reload();
-		navigate('/login'); // После выхода перенаправляем на страницу логина
+		navigate('/login'); 
 	};
 
 	return (
 		<nav>
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
-					<div className={classes.nav_wrapper}>
-						{userRole === 'StudentProfile' ? (
-							<div>
-								<NavLink to="/homeuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
-									EduConnect
-								</NavLink>
-							</div>
-						) : (
-							<div>
-								<NavLink to="/home" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
-									Главная
-								</NavLink>
-							</div>
+				<div className={classes.nav_wrapper}>
+    {userRole === 'StudentProfile' ? (
+      <div>
+        <NavLink to="/homeuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+          EduConnect
+        </NavLink>
+      </div>
+    ) : userRole === 'ManagerProfile' ? (
+      <div>
+       
+	   <NavLink to="/homeemployer" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+          EduConnect
+        </NavLink>
+      </div>
+    ) : (
+      <div>
+        <NavLink to="/home" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+          Главная
+        </NavLink>
+      </div>
 						)}
 						<div className={classes.side_buttons}>
 							{!isAuthenticated ? (
