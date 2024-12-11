@@ -34,10 +34,13 @@ const HomeUser = () => {
 						<img src="/public/search.png" alt="" /> Поиск курсов
 					</button>
 				</NavLink>
-				<button className={classes.button}>
-					<img src="/public/vacancy.png" alt="" />
-					Вакансии
-				</button>
+				<NavLink to="/coursesuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
+					<button className={classes.button}>
+						<img src="/public/vacancy.png" alt="" />
+						Вакансии
+					</button>
+				</NavLink>
+
 				<NavLink to="/projectuser" className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>
 					<button className={classes.button}>
 						<img src="/public/project.png" alt="" /> Проекты

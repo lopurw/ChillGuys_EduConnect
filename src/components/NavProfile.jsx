@@ -6,7 +6,7 @@ import MyCourses from './MyCourses';
 import classes from '../styles/NavProfile.module.css';
 
 const NavProfile = () => {
-  const [role, setRole] = useState('студент');
+  const [role, setRole] = useState('работодатель');
   const [selectedTab, setSelectedTab] = useState('personalInfo');
   const [isEditable, setIsEditable] = useState(false);
   const [userData, setUserData] = useState({
