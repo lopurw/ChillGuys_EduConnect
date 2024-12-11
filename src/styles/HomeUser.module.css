@@ -7,6 +7,23 @@
 	flex-direction: column;
 	padding: 20px;
 	gap: 40px;
+	border-radius: 30px;
+	margin: 50px 0 50px 0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	justify-content: center;
+}
+@media (max-width: 500px) {
+	.main {
+		display: flex;
+		align-items: center;
+		justify-self: center;
+		flex-direction: column;
+		padding: 0;
+		gap: 40px;
+		border-radius: 30px;
+		margin: 50px 0 50px 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	}
 }
 .buttons_container {
 	display: flex;
@@ -14,6 +31,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 }
+
 .button {
 	background: var(--green-color);
 	color: #fff;
@@ -30,6 +48,7 @@
 	width: 186px;
 	gap: 10px;
 }
+
 .button:hover {
 	scale: 1.05;
 	transform: translateY(-5px);

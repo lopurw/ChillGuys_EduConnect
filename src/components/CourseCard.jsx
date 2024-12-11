@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import classes from "../styles/CoursesCard.module.css";
 const CourseCard = ({ course, onStartCourse, showProgress }) => {
@@ -33,6 +34,7 @@ const CourseCard = ({ course, onStartCourse, showProgress }) => {
       </div>
     </Link>
   );
+
 };
 
 export default CourseCard;

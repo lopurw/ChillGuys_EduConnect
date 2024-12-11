@@ -11,6 +11,7 @@ services:
       - .:/app
       - /app/node_modules
     command: npm run dev
+
   postgres:
     image: postgres
     networks:
