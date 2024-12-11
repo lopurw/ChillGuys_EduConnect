@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import image from '../assets/png-clipart-businessperson-african-american-black-graphy-chief-executive-man-miscellaneous-photography-thumbnail.png';
+import image from '../assets/react.svg';
 import { getCourseById, completeLesson } from '../services/ApiServ.js';
 import classes from '../styles/CoursesDetail.module.css';
 import TeacherView from './TeacherView.jsx';
@@ -226,10 +226,19 @@ const CourseDetail = () => {
 								</li>
 							))}
 						</div>
-						<AddTask />
+						{userRole === 'StudentProfile' ? (
+							<div>
+							</div>
+						) : userRole === 'TeacherProfile' ? (
+							<AddTask />
+						) : (
+							<div>
+
+							</div>
+						)}
 					</div>
 
-          {userRole === 'StudentProfile' ? (
+          				{userRole === 'StudentProfile' ? (
 							<div>
 								<StudentView></StudentView>
 							</div>

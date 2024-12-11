@@ -80,7 +80,7 @@ const Navbar = () => {
 							) : (
 								<div className={classes.side_button}>
 									<NavLink to="/myprofile" className={classes.profile_link}>
-										<img src={image} alt="User Avatar" className={classes.avatar} />
+										<img src={'src/assets/react.svg'} alt="User Avatar" className={classes.avatar} />
 										<span className={classes.user_name}>{localStorage.getItem('userName')}</span>
 									</NavLink>
 									<button onClick={handleLogout} className={classes.logout_button}>
