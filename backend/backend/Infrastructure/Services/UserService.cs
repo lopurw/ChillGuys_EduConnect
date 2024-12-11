@@ -34,25 +34,38 @@ public class UserService(DataContext context, IConfiguration configuration)
             return new Response<string>(HttpStatusCode.InternalServerError, ex.Message);
         }
     }
-
-    public async Task<Response<string>> UpdateUserAsync(User updatedUser)
+    public async Task<Response<string>> UpdateUserAsync(GetUserDto updatedUserData)
     {
         try
         {
-            var user = await context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id == updatedUser.Id);
+            var user = await context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id == updatedUserData.Id);
             if (user == null)
                 return new Response<string>(HttpStatusCode.NotFound, "User not found");
 
-            user.Name = updatedUser.Name;
-            user.Email = updatedUser.Email;
-            user.Password = updatedUser.Password; // Обновите хеширование пароля по необходимости
-            user.ProfileImage = updatedUser.ProfileImage;
+            // Обновление основных данных пользователя
+            user.Name = updatedUserData.Name;
+            user.Email = updatedUserData.Email;
+            user.ProfileImage = updatedUserData.ProfileImage;
             user.UpdatedAt = DateTime.UtcNow;
 
-            if (updatedUser.Role != null && updatedUser.Role.GetType() != user.Role.GetType())
+            // Проверяем, нужно ли обновить роль пользователя
+            if (!string.IsNullOrEmpty(updatedUserData.RoleName) && user.Role.GetType().Name != updatedUserData.RoleName)
             {
-                context.Entry(user.Role).State = EntityState.Deleted; // Удаляем старую роль
-                user.Role = updatedUser.Role; // Присваиваем новую
+                // Удаляем старую роль
+                if (user.Role != null)
+                    context.Entry(user.Role).State = EntityState.Deleted;
+
+                // Создаем новую роль на основе RoleName и RoleDetails
+                user.Role = updatedUserData.RoleName switch
+                {
+                    "ManagerProfile" => JsonSerializer.Deserialize<ManagerProfile>(updatedUserData.RoleDetails),
+                    "TeacherProfile" => JsonSerializer.Deserialize<TeacherProfile>(updatedUserData.RoleDetails),
+                    "StudentProfile" => JsonSerializer.Deserialize<StudentProfile>(updatedUserData.RoleDetails),
+                    _ => throw new ArgumentException("Invalid role type")
+                };
+
+                if (user.Role == null)
+                    return new Response<string>(HttpStatusCode.BadRequest, "Invalid role details");
             }
 
             await context.SaveChangesAsync();
