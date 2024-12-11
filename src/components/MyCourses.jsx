@@ -63,6 +63,7 @@ const MyCourses = () => {
 			  course={course}
 			  onStartCourse={handleStartCourse}
 			  showProgress={true}
+			
 			/>
 		  ))}
 		</div>

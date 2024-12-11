@@ -9,6 +9,7 @@ const CourseDetail = () => {
   const navigate = useNavigate(); 
   const [course, setCourse] = useState(null); 
   const [loading, setLoading] = useState(true);
+  const userRole = localStorage.getItem('userRole');
 
 
   useEffect(() => {
@@ -172,6 +173,7 @@ const CourseDetail = () => {
           </ul>
 
           <button>Вступить</button>
+
 
 		  
         </div>
